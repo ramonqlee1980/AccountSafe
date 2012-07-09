@@ -1,0 +1,68 @@
+/*
+ Localizable.strings
+ AccountSafe
+ 
+ Created by li ming on 6/24/12.
+ Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+ */
+CFBundleDisplayName="帳號管家";
+
+"AccountTypeCount" = "10";
+
+"TypeName0"="網站論壇";
+"TypeIcon0"="forum";
+
+"TypeName1"="電子郵件";
+"TypeIcon1"="email";
+
+"TypeName2"="遊戲";
+"TypeIcon2"="game";
+
+"TypeName3"="聊天";
+"TypeIcon3"="chat";
+
+"TypeName4"="理財";
+"TypeIcon4"="wealth";
+
+"TypeName5"="微博";
+"TypeIcon5"="microblog";
+
+"TypeName6"="手機相關";
+"TypeIcon6"="mobile";
+
+"TypeName7"="臨時";
+"TypeIcon7"="temp";
+
+"TypeName8"="網購";
+"TypeIcon8"="eshopping";
+
+"TypeName9"="其他";
+"TypeIcon9"="others";
+
+"Account"="帳號: ";
+"Name"="名稱: ";
+"Password"="密碼: ";
+"Note"="備註: ";
+
+"Purchase"="購買";
+"Set"="設置密碼";
+"Enter"="進入";
+"Back"="返回";
+"invalid_data_title"="請檢查輸入的信息";
+"OK"="確定";
+"Cancel"="取消";
+"Delete"="刪除";
+"Save"="保存";
+"enterPasswordPlaceholder"="在此輸入密碼";
+"requiredPlaceholder" = "必填項";
+"optional"="選填項";
+"try2delete" = "警告：永久刪除該帳號?";
+
+"NullName"="名稱不能為空";
+"NullAccount"="帳號不能為空";
+"NullPassword"="密碼不能為空";
+"WrongPassword"= "密碼不對奧";
+
+"Purchasing"="Purchasing...";
+"Loading"="Loading...";
+"purchased"="purchased successfully";

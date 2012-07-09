@@ -1,0 +1,68 @@
+/* 
+  Localizable.strings
+  AccountSafe
+
+  Created by li ming on 6/24/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+CFBundleDisplayName="帐号管家";
+
+"AccountTypeCount" = "10";
+
+"TypeName0"="网站论坛";
+"TypeIcon0"="forum";
+
+"TypeName1"="电子邮件";
+"TypeIcon1"="email";
+
+"TypeName2"="游戏";
+"TypeIcon2"="game";
+
+"TypeName3"="聊天";
+"TypeIcon3"="chat";
+
+"TypeName4"="理财";
+"TypeIcon4"="wealth";
+
+"TypeName5"="微博";
+"TypeIcon5"="microblog";
+
+"TypeName6"="手机相关";
+"TypeIcon6"="mobile";
+
+"TypeName7"="临时";
+"TypeIcon7"="temp";
+
+"TypeName8"="网购";
+"TypeIcon8"="eshopping";
+
+"TypeName9"="其他";
+"TypeIcon9"="others";
+
+"Account"="帐号: ";
+"Name"="名称: ";
+"Password"="密码: ";
+"Note"="备注: ";
+
+"Purchase"="购买";
+"Set"="设置密码";
+"Enter"="进入";
+"Back"="返回";
+"invalid_data_title"="请检查输入的信息";
+"OK"="确定";
+"Cancel"="取消";
+"Delete"="删除";
+"Save"="保存";
+"enterPasswordPlaceholder"="在此输入密码";
+"requiredPlaceholder" = "必填项";
+"optional"="选填项";
+"try2delete" = "警告：永久删除该帐号?";
+
+"NullName"="名称不能为空";
+"NullAccount"="帐号不能为空";
+"NullPassword"="密码不能为空";
+"WrongPassword"= "密码不对奥";
+
+"Purchasing"="Purchasing...";
+"Loading"="Loading...";
+"purchased"="purchased successfully";

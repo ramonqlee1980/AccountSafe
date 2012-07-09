@@ -1,0 +1,70 @@
+/* 
+  Localizable.strings
+  AccountSafe
+
+  Created by li ming on 6/24/12.
+  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+*/
+CFBundleDisplayName="AccountSafe";
+
+"AccountTypeCount" = "10";
+"TypeName0"="Forum";
+"TypeIcon0"="forum";
+
+"TypeName1"="Email";
+"TypeIcon1"="Email";
+
+"TypeName2"="Game";
+"TypeIcon2"="game";
+
+"TypeName3"="Chat";
+"TypeIcon3"="chat";
+
+"TypeName4"="Wealth";
+"TypeIcon4"="wealth";
+
+"TypeName5"="Microblog";
+"TypeIcon5"="microblog";
+
+"TypeName6"="Mobile";
+"TypeIcon6"="mobile";
+
+"TypeName7"="Temp";
+"TypeIcon7"="temp";
+
+"TypeName8"="EShopping";
+"TypeIcon8"="eshopping";
+
+"TypeName9"="Others";
+"TypeIcon9"="others";
+
+"Account"="Account: ";
+"Name"="Name: ";
+"Password"="Password: ";
+"Note"="Note: ";
+
+
+"Purchase"="Purchase";
+"Set"="Set";
+"Enter"="Enter";
+"Back"="Back";
+"invalid_data_title"="Invalid data";
+"OK"="OK";
+"Cancel"="Cancel";
+"Delete"="Delete";
+"Save"="Save";
+
+"try2delete" = "Warning:Are you sure to delete permanently?";
+
+"enterPasswordPlaceholder"="Enter passcode";
+"requiredPlaceholder" = "required";
+"optional"="optional";
+
+"NullName"="Name can't be blank!";
+"NullAccount"="Account can't be blank!";
+"NullPassword"="Password can't be blank!";
+"WrongPassword"= "Wrong Passcode";
+
+"Purchasing"="Purchasing...";
+"Loading"="Loading...";
+"purchased"="purchased successfully";
