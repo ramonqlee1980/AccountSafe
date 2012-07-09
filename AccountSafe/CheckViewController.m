@@ -8,6 +8,7 @@
 
 #import "CheckViewController.h"
 #import "AccountData.h"
+#import "VIPController.h"
 
 @implementation CheckViewController
 #import "AccountSummaryController.h"
@@ -75,8 +76,22 @@
         [AccountData setOpenDoorKey:mPassword.text];
         mPassword.text = @"";
         UIViewController* accountPageController = [[AccountSummaryController alloc]initWithNibName:@"AccountSummaryView" bundle:nil];
-        [self.navigationController pushViewController:accountPageController animated:YES];
+        
+        UIViewController* vipCtrl = [[VIPController alloc]initWithNibName:@"VIPController" bundle:nil];
+        UINavigationController* vipNavi = [[UINavigationController alloc]initWithRootViewController:vipCtrl];        
+        //add tabcontroller
+        NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageController,vipNavi, nil];       
+        
+        UITabBarController* tabCtrl = [[UITabBarController alloc]init];
+        tabCtrl.viewControllers = ctrls;
+                
+        [self.navigationController pushViewController:tabCtrl animated:YES];
+        
+        [vipNavi release];
+        [vipCtrl release];
         [accountPageController release];
+        [ctrls release];
+        [tabCtrl release]; 
     }
     else
     {

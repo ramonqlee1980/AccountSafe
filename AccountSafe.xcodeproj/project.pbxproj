@@ -32,6 +32,8 @@
 		308EE8AC159BB50F00166A6D /* AccountData.m in Sources */ = {isa = PBXBuildFile; fileRef = 308EE8AB159BB50F00166A6D /* AccountData.m */; };
 		308EE8BA159BC6E400166A6D /* AccountDetails.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 308EE8B8159BC6E400166A6D /* AccountDetails.xcdatamodeld */; };
 		308EE8C2159BCB6A00166A6D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 308EE8C1159BCB6A00166A6D /* CoreData.framework */; };
+		3092292E15AB8AB3003BECF8 /* VIPController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3092292C15AB8AB3003BECF8 /* VIPController.m */; };
+		3092292F15AB8AB3003BECF8 /* VIPController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3092292D15AB8AB3003BECF8 /* VIPController.xib */; };
 		3093B0DE159BEBDA002B57A8 /* AccountDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3093B0DD159BEBDA002B57A8 /* AccountDetailController.m */; };
 		3094435715974739002CA37A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3094435915974739002CA37A /* Localizable.strings */; };
 		30971ADB159EB99500C1BD9A /* AccountInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 30971ADA159EB99500C1BD9A /* AccountInfo.m */; };
@@ -82,6 +84,9 @@
 		308EE8AB159BB50F00166A6D /* AccountData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountData.m; sourceTree = "<group>"; };
 		308EE8B9159BC6E400166A6D /* AccountDetails.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails.xcdatamodel; sourceTree = "<group>"; };
 		308EE8C1159BCB6A00166A6D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3092292B15AB8AB3003BECF8 /* VIPController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VIPController.h; sourceTree = "<group>"; };
+		3092292C15AB8AB3003BECF8 /* VIPController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VIPController.m; sourceTree = "<group>"; };
+		3092292D15AB8AB3003BECF8 /* VIPController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VIPController.xib; sourceTree = "<group>"; };
 		3093B0DC159BEBDA002B57A8 /* AccountDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDetailController.h; sourceTree = "<group>"; };
 		3093B0DD159BEBDA002B57A8 /* AccountDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDetailController.m; sourceTree = "<group>"; };
 		309443541597465C002CA37A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -196,6 +201,7 @@
 		308918B71596CAAD000B5BE7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				3092292D15AB8AB3003BECF8 /* VIPController.xib */,
 				3083B8CF1596AA8700E94875 /* CheckViewController_iPhone.xib */,
 				308918B91596CB4B000B5BE7 /* AccountSummaryView.xib */,
 				308918BB1596CC81000B5BE7 /* AccountDetailView.xib */,
@@ -227,6 +233,8 @@
 				3083B8CD1596AA8700E94875 /* CheckViewController.m */,
 				3093B0DC159BEBDA002B57A8 /* AccountDetailController.h */,
 				3093B0DD159BEBDA002B57A8 /* AccountDetailController.m */,
+				3092292B15AB8AB3003BECF8 /* VIPController.h */,
+				3092292C15AB8AB3003BECF8 /* VIPController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -325,6 +333,7 @@
 				308EE31E15A05E2F00FE6C6C /* temp.png in Resources */,
 				308EE31F15A05E2F00FE6C6C /* wealth.png in Resources */,
 				308EE32215A05ECA00FE6C6C /* chat.png in Resources */,
+				3092292F15AB8AB3003BECF8 /* VIPController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +357,7 @@
 				30ACB14B15A18A6700BEE726 /* InAppRageIAPHelper.m in Sources */,
 				30ACB14C15A18A6700BEE726 /* MBProgressHUD.m in Sources */,
 				30ACB14D15A18A6700BEE726 /* Reachability.m in Sources */,
+				3092292E15AB8AB3003BECF8 /* VIPController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

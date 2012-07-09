@@ -44,6 +44,9 @@ CFBundleDisplayName="帐号管家";
 "Password"="密码: ";
 "Note"="备注: ";
 
+"TabTitleVIP" = "VIP";
+"TabTitleSummary" = "Accounts";
+
 "Purchase"="购买";
 "Set"="设置密码";
 "Enter"="进入";

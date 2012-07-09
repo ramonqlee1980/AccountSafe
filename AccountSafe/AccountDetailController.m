@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProtocolLogManager.h"
 
+
 @interface AccountDetailController()
 
 -(NSString*)validValues;

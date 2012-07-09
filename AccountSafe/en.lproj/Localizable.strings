@@ -43,6 +43,8 @@ CFBundleDisplayName="AccountSafe";
 "Password"="Password: ";
 "Note"="Note: ";
 
+"TabTitleVIP" = "VIP";
+"TabTitleSummary" = "Accounts";
 
 "Purchase"="Purchase";
 "Set"="Set";

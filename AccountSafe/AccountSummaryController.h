@@ -8,19 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@class MBProgressHUD;
+
 @class AccountData;
 @interface AccountSummaryController : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
     UITableView* _tableView;
     AccountData* _accountData;
-    MBProgressHUD *_hud;
 }
-
-@property (retain) MBProgressHUD *hud;
 
 @property (nonatomic,retain) IBOutlet UITableView* tableView;
 
--(IBAction)rightItemClickInAppPurchase:(id)sender;
+
 
 @end
