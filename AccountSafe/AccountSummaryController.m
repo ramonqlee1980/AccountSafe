@@ -20,13 +20,11 @@
 #define kTitleFontSize 20
 #define kDetailFontSize 12
 #define kTopMargin 5
-#define kFreeListMaxSectionIndex 5
 
 
 @interface AccountSummaryController()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
 +(BOOL)isPurchased;
-+(BOOL)isSectionAvailable:(NSUInteger)section;
 - (NSString *)localizedPrice:(NSLocale *)priceLocale price:(NSDecimalNumber *)price;
 @end
 
@@ -140,7 +138,7 @@
     NSLog(@"cellForRowAtIndexPath:%@",cell.textLabel.text );    
     
     //disable some sections for trial version
-    UIColor* color = [AccountSummaryController isSectionAvailable:indexPath.section]?[UIColor whiteColor]:[UIColor brownColor];   
+    UIColor* color = [UIColor whiteColor];   
     
     UIView* backgroundView = [[UIView alloc]initWithFrame:cell.frame];
     backgroundView.backgroundColor = color;
@@ -151,10 +149,7 @@
     
     return cell;
 }
-+(BOOL)isSectionAvailable:(NSUInteger)section
-{
-    return ([AccountSummaryController isPurchased]||(section < kFreeListMaxSectionIndex && (![AccountSummaryController isPurchased])));
-}
+
 +(BOOL)isPurchased
 {
     BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
@@ -185,17 +180,11 @@
     //if first row is selected,add a new typed acccount
     //else open review view
     NSLog(@"didSelectRowAtIndexPath:%d-%d",indexPath.section,indexPath.row);
-    if([AccountSummaryController isSectionAvailable:indexPath.section])
-    {
-        AccountInfo* info = (indexPath.row==kTitleRow)?nil:[_accountData objectOfRow:indexPath.row inSection:indexPath.section];
-        AccountDetailController* d = [[AccountDetailController alloc]initWithAccountInfo:indexPath.section accountInfo:info nibNameOrNil:@"AccountDetailView" bundle:nil];
-        [self.navigationController pushViewController:d animated:YES];
-        [d release];
-    }
-    else
-    {
-        [self rightItemClickInAppPurchase:nil];
-    }
+    AccountInfo* info = (indexPath.row==kTitleRow)?nil:[_accountData objectOfRow:indexPath.row inSection:indexPath.section];
+    AccountDetailController* d = [[AccountDetailController alloc]initWithAccountInfo:indexPath.section accountInfo:info nibNameOrNil:@"AccountDetailView" bundle:nil];
+    [self.navigationController pushViewController:d animated:YES];
+    [d release];
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -258,27 +247,11 @@
         [_tableView reloadData];
     }
     
-    //app is purchased?   
-    if(![AccountSummaryController isPurchased])  
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil];
-        
-        
-        NSString* buttonName = NSLocalizedString(@"Purchase",@"");
-        [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:buttonName action:@selector(rightItemClickInAppPurchase:)];
-    }
-    else
-    {
-        self.navigationItem.rightBarButtonItem = nil;
-    }
     
     [super viewWillAppear:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [_accountData release];
     _accountData = nil;
     [super viewWillDisappear:animated];
@@ -368,7 +341,7 @@
 -(IBAction)rightItemClickInAppPurchase:(id)sender
 {   
     if ([AccountSummaryController isPurchased]) {
-//        NSString* ret = NSLocalizedString(@"try2delete", "");
+        //        NSString* ret = NSLocalizedString(@"try2delete", "");
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"purchased already" delegate:self cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
         [alert show];    
         return;
