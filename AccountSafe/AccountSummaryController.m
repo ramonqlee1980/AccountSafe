@@ -190,7 +190,8 @@
  */
 -(IBAction)addAccountCategory:(id)sender
 {
-    
+    //TODO::parse current xml from directory and append this new one
+    //save to file
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {

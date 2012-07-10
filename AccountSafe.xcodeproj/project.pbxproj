@@ -18,6 +18,7 @@
 		3083B8D11596AA8700E94875 /* CheckViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3083B8CF1596AA8700E94875 /* CheckViewController_iPhone.xib */; };
 		308918BA1596CB4B000B5BE7 /* AccountSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308918B91596CB4B000B5BE7 /* AccountSummaryView.xib */; };
 		308918BC1596CC81000B5BE7 /* AccountDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 308918BB1596CC81000B5BE7 /* AccountDetailView.xib */; };
+		308E338B15ACE8D200CCF777 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 308E338A15ACE8D200CCF777 /* GDataXMLNode.m */; };
 		308EE31615A05E2F00FE6C6C /* eshopping.png in Resources */ = {isa = PBXBuildFile; fileRef = 308EE30C15A05E2F00FE6C6C /* eshopping.png */; };
 		308EE31715A05E2F00FE6C6C /* feedback.png in Resources */ = {isa = PBXBuildFile; fileRef = 308EE30D15A05E2F00FE6C6C /* feedback.png */; };
 		308EE31815A05E2F00FE6C6C /* forum.png in Resources */ = {isa = PBXBuildFile; fileRef = 308EE30E15A05E2F00FE6C6C /* forum.png */; };
@@ -69,6 +70,8 @@
 		308918BB1596CC81000B5BE7 /* AccountDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDetailView.xib; sourceTree = "<group>"; };
 		308B2200159EF12F00DCDC57 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		308B2201159EF1B100DCDC57 /* zh-Hant-TW */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant-TW"; path = "zh-Hant-TW.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		308E338915ACE8D200CCF777 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		308E338A15ACE8D200CCF777 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		308EE30C15A05E2F00FE6C6C /* eshopping.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eshopping.png; sourceTree = "<group>"; };
 		308EE30D15A05E2F00FE6C6C /* feedback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = feedback.png; sourceTree = "<group>"; };
 		308EE30E15A05E2F00FE6C6C /* forum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forum.png; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 		308D2BC01597C99600B8AD88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				308E338D15ACE8D600CCF777 /* GDataXML */,
 				30ACB14E15A18A7300BEE726 /* Util */,
 				30ACB14015A18A4500BEE726 /* InAppPurchase */,
 				30971AD9159EB99500C1BD9A /* AccountInfo.h */,
@@ -237,6 +241,15 @@
 				3092292C15AB8AB3003BECF8 /* VIPController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		308E338D15ACE8D600CCF777 /* GDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				308E338915ACE8D200CCF777 /* GDataXMLNode.h */,
+				308E338A15ACE8D200CCF777 /* GDataXMLNode.m */,
+			);
+			name = GDataXML;
 			sourceTree = "<group>";
 		};
 		30ACB14015A18A4500BEE726 /* InAppPurchase */ = {
@@ -358,6 +371,7 @@
 				30ACB14C15A18A6700BEE726 /* MBProgressHUD.m in Sources */,
 				30ACB14D15A18A6700BEE726 /* Reachability.m in Sources */,
 				3092292E15AB8AB3003BECF8 /* VIPController.m in Sources */,
+				308E338B15ACE8D200CCF777 /* GDataXMLNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

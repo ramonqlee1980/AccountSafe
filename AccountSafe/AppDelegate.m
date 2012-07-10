@@ -13,6 +13,11 @@
 #import "InAppRageIAPHelper.h"
 //#define DEBUG_INIT
 
+@interface AppDelegate()
+-(void)transferXMLWhenInstall;
+
+@end
+
 
 @implementation AppDelegate
 
@@ -20,6 +25,13 @@
 @synthesize viewController = _viewController;
 @synthesize naviController;
 
+#pragma transferXML
+-(void)transferXMLWhenInstall
+{
+    //TODO::transfer xml to doc directory when installing
+    //if file exist,just return
+    
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
