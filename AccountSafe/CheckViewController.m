@@ -14,12 +14,13 @@
 #import "AccountSummaryController.h"
 
 
-#pragma lowmemory 
+#pragma mark - Low Memory 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
 // called when 'return' key pressed. return NO to ignore.
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -45,9 +46,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
+    /*UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
     self.navigationItem.backBarButtonItem = newBackButton;
-    [newBackButton release];
+    [newBackButton release];*/
+    self.navigationItem.hidesBackButton = YES;
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidUnload
@@ -64,6 +67,7 @@
     //no 
     BOOL pwRight = YES;
     NSString* pw = [AccountData getOpenDoorKey];
+    NSLog(@"passcode:%@",pw);
     if (!pw.length) {
         pwRight = (mPassword.text.length!=0);
     }    
@@ -73,6 +77,14 @@
     }
     if (pwRight)
     {
+        
+        /*self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");    
+        
+        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
+        self.navigationItem.backBarButtonItem = newBackButton;
+        [newBackButton release]; */ 
+        
+        
         [AccountData setOpenDoorKey:mPassword.text];
         mPassword.text = @"";
         UIViewController* accountPageController = [[AccountSummaryController alloc]initWithNibName:@"AccountSummaryView" bundle:nil];
@@ -83,7 +95,7 @@
         NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageController,vipNavi, nil];       
         
         UITabBarController* tabCtrl = [[UITabBarController alloc]init];
-        tabCtrl.viewControllers = ctrls;
+        [tabCtrl setViewControllers:ctrls];
                 
         [self.navigationController pushViewController:tabCtrl animated:YES];
         

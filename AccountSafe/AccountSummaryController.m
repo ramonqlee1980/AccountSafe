@@ -192,14 +192,9 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
-{    
+{  
     self.title = NSLocalizedString(@"TabTitleSummary", "");
-    self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");    
-    
-    UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
-    self.navigationItem.backBarButtonItem = newBackButton;
-    [newBackButton release];  
-    
+    self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
     
     _accountData = [[AccountData alloc]init];
     

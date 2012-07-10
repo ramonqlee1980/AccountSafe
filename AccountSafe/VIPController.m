@@ -61,6 +61,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
     // Do any additional setup after loading the view from its nib.
     if(![VIPController isPurchased])
     {
@@ -194,8 +195,7 @@
     
     UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"purchased","") delegate:self cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
     [alert show]; 
-    
-    [self.tableView reloadData];
+        
 }
 
 - (void)productPurchaseFailed:(NSNotification *)notification {

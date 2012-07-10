@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class MBProgressHUD;
 
-@interface VIPController : UITableViewController
+@interface VIPController : UIViewController
 {
     MBProgressHUD *_hud;
 }
