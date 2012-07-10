@@ -46,6 +46,7 @@ CFBundleDisplayName="AccountSafe";
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
 
+"Add"="Add";
 "Purchase"="Purchase";
 "Set"="Set";
 "Enter"="Enter";

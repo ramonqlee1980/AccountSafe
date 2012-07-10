@@ -18,6 +18,6 @@
 
 @property (nonatomic,retain) IBOutlet UITableView* tableView;
 
-
+-(IBAction)addAccountCategory:(id)sender;
 
 @end

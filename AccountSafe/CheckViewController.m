@@ -49,8 +49,6 @@
     /*UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
     self.navigationItem.backBarButtonItem = newBackButton;
     [newBackButton release];*/
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)viewDidUnload
@@ -61,6 +59,19 @@
     //if password set,display login,else display set  
     
 }
+
+#pragma mark tabBar delegate
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{    
+    BOOL hideNavi = ![viewController isKindOfClass:[AccountSummaryController class]];
+    if (tabBarController) {
+        NSLog(@"tabBarController.selectedIndex:%d",tabBarController.selectedIndex);
+        tabBarController.navigationController.navigationBarHidden = hideNavi;
+    }
+    return YES;
+}
+
+
 -(IBAction)rightItemClick:(id)sender
 {
     //check password & enter accountSummary view
@@ -77,28 +88,26 @@
     }
     if (pwRight)
     {
-        
-        /*self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");    
-        
-        UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
-        self.navigationItem.backBarButtonItem = newBackButton;
-        [newBackButton release]; */ 
-        
+        self.navigationController.navigationBarHidden = YES;
         
         [AccountData setOpenDoorKey:mPassword.text];
         mPassword.text = @"";
         UIViewController* accountPageController = [[AccountSummaryController alloc]initWithNibName:@"AccountSummaryView" bundle:nil];
+        UINavigationController* accountPageControllerNavi = [[UINavigationController alloc]initWithRootViewController:accountPageController];
         
         UIViewController* vipCtrl = [[VIPController alloc]initWithNibName:@"VIPController" bundle:nil];
         UINavigationController* vipNavi = [[UINavigationController alloc]initWithRootViewController:vipCtrl];        
         //add tabcontroller
-        NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageController,vipNavi, nil];       
+        NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageControllerNavi,vipNavi, nil];       
         
         UITabBarController* tabCtrl = [[UITabBarController alloc]init];
+        //tabCtrl.delegate = self;
         [tabCtrl setViewControllers:ctrls];
                 
         [self.navigationController pushViewController:tabCtrl animated:YES];
         
+        
+        [accountPageControllerNavi release];
         [vipNavi release];
         [vipCtrl release];
         [accountPageController release];

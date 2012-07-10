@@ -46,7 +46,7 @@ CFBundleDisplayName="帳號管家";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
-
+"Add"="Add";
 "Purchase"="購買";
 "Set"="設置密碼";
 "Enter"="進入";

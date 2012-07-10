@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CheckViewController : UIViewController<UITextFieldDelegate>
+@interface CheckViewController : UIViewController<UITextFieldDelegate,UITabBarControllerDelegate>
 {
     IBOutlet UITextField* mPassword;
 }

@@ -188,14 +188,23 @@
  {
  }
  */
-
-
+-(IBAction)addAccountCategory:(id)sender
+{
+    
+}
+-(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
+{
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:buttonName style:UIBarButtonItemStyleBordered target:self action:action];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.title = title;    
+    [rightItem release];
+}
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {  
     self.title = NSLocalizedString(@"TabTitleSummary", "");
-    self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
-    
+    //self.navigationItem.hidesBackButton = YES;
+    [self setRightClick:@"" buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
     _accountData = [[AccountData alloc]init];
     
     [super viewDidLoad];
