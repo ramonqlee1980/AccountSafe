@@ -11,10 +11,8 @@
 #import "CheckViewController.h"
 #import "ProtocolLogManager.h"
 #import "InAppRageIAPHelper.h"
+#import "constants.h"
 
-#define kAccountCategoryFileNameWithSuffix @"AccountCategory.xml"
-#define kAccountCategoryFileName @"AccountCategory"
-#define kAccountCategoryFileType @"xml"
 
 @interface AppDelegate()
 -(void)transferXMLWhenInstall;
@@ -37,6 +35,10 @@
     NSFileManager* fm = [NSFileManager defaultManager];
     if([fm fileExistsAtPath:xmlFileName])
     {
+#ifdef kDelete
+        NSError* error = nil;
+        [fm removeItemAtPath:xmlFileName error:&error];
+#endif
         return;
     }
     

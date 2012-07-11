@@ -41,14 +41,7 @@
     mPassword.delegate = self;
     mPassword.returnKeyType = UIReturnKeyDone;
     mPassword.placeholder = NSLocalizedString(@"enterPasswordPlaceholder", "");
-    [mPassword becomeFirstResponder];
-    
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    
-    /*UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Back",@"") style: UIBarButtonItemStyleBordered target: nil action: nil];  
-    self.navigationItem.backBarButtonItem = newBackButton;
-    [newBackButton release];*/
+    [mPassword becomeFirstResponder];  
 }
 
 - (void)viewDidUnload
@@ -58,17 +51,6 @@
     // e.g. self.myOutlet = nil;
     //if password set,display login,else display set  
     
-}
-
-#pragma mark tabBar delegate
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
-{    
-    BOOL hideNavi = ![viewController isKindOfClass:[AccountSummaryController class]];
-    if (tabBarController) {
-        NSLog(@"tabBarController.selectedIndex:%d",tabBarController.selectedIndex);
-        tabBarController.navigationController.navigationBarHidden = hideNavi;
-    }
-    return YES;
 }
 
 
@@ -101,7 +83,6 @@
         NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageControllerNavi,vipNavi, nil];       
         
         UITabBarController* tabCtrl = [[UITabBarController alloc]init];
-        //tabCtrl.delegate = self;
         [tabCtrl setViewControllers:ctrls];
                 
         [self.navigationController pushViewController:tabCtrl animated:YES];

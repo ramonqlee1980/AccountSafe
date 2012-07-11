@@ -11,6 +11,9 @@
 #import "AccountData.h"
 #import "AccountInfo.h"
 #import "ProtocolLogManager.h"
+#import "GDataXMLNode.h"
+#import "constants.h"
+#import "AppDelegate.h"
 
 
 #define kTitleRow 0
@@ -145,9 +148,8 @@
         ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
         [mgr removeObject:info];
         
-        [_accountData release];
-        _accountData = [[AccountData alloc]init];
-        
+        [_accountData removeObjectAtRow:indexPath.row inSection:indexPath.section];
+                
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -155,6 +157,10 @@
 {
     //if first row is selected,add a new typed acccount
     //else open review view
+    UIBarButtonItem *back = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = back;
+    [back release];
+    
     NSLog(@"didSelectRowAtIndexPath:%d-%d",indexPath.section,indexPath.row);
     AccountInfo* info = (indexPath.row==kTitleRow)?nil:[_accountData objectOfRow:indexPath.row inSection:indexPath.section];
     AccountDetailController* d = [[AccountDetailController alloc]initWithAccountInfo:indexPath.section accountInfo:info nibNameOrNil:@"AccountDetailView" bundle:nil];
@@ -188,10 +194,17 @@
  {
  }
  */
+-(void)persistentCategoryData
+{    
+    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication]delegate];
+    NSString* xmlFileName = [[delegate applicationDocumentsDirectory]stringByAppendingPathComponent:kAccountCategoryFileNameWithSuffix];
+    [_accountData writeToFile:xmlFileName atomically:YES];
+}
 -(IBAction)addAccountCategory:(id)sender
 {
     //TODO::parse current xml from directory and append this new one
-    //save to file
+    //save to file    
+    
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {
@@ -206,7 +219,9 @@
     self.title = NSLocalizedString(@"TabTitleSummary", "");
     //self.navigationItem.hidesBackButton = YES;
     [self setRightClick:@"" buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
-    _accountData = [[AccountData alloc]init];
+    _accountData = [AccountData shareInstance];
+    
+    self.tabBarController.hidesBottomBarWhenPushed = YES;
     
     [super viewDidLoad];
 }
@@ -217,17 +232,16 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
+        
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     if(!_accountData)
     {
-        _accountData = [[AccountData alloc]init];
+        _accountData = [AccountData shareInstance];
         [_tableView reloadData];
-    }    
-    
+    }     
     [super viewWillAppear:animated];
 }
 -(void)viewWillDisappear:(BOOL)animated

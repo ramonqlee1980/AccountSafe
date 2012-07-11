@@ -11,12 +11,15 @@
 @interface AccountData : NSObject
 {
     NSMutableArray* _mData;
-    NSArray* _mSectionName;
-    NSArray* _mSectionNameIcons;
+    NSMutableArray* _mSectionName;
+    NSMutableArray* _mSectionNameIcons;
     NSManagedObjectContext* _managedObjectContext;
 }
 +(NSString*)getOpenDoorKey;
 +(void)setOpenDoorKey:(NSString*)key;
+
++(id)shareInstance;
+
 //init
 -(id)init;
 
@@ -32,4 +35,8 @@
 //row data in section
 -(id)objectOfRow:(NSUInteger)rowIdex inSection:(NSUInteger)sectionIndex;
 -(void)setRowInSection:(id)info inSection:(NSInteger)section;
+-(void)removeObjectAtRow:(NSUInteger)rowIndex inSection:(NSUInteger)sectionIndex;
+-(void)addSection:(NSString*)title icon:(NSString*)icon;
+
+-(BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 @end
