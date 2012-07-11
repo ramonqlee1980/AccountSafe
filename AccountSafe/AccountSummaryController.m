@@ -14,6 +14,7 @@
 #import "GDataXMLNode.h"
 #import "constants.h"
 #import "AppDelegate.h"
+#import "UITextFieldActionSheet.h"
 
 
 #define kTitleRow 0
@@ -202,9 +203,31 @@
 }
 -(IBAction)addAccountCategory:(id)sender
 {
-    //TODO::parse current xml from directory and append this new one
-    //save to file    
+    //TODO:get new name
+    //NSString* newName = @"wealth";    
+    UITextFieldActionSheet* sheet = [[[UITextFieldActionSheet alloc] 
+                                     initWithImage:@"添加的图案可用以下方式调整" 
+                                     delegate:nil cancelButtonTitle:@"知道了" 
+                                     destructiveButtonTitle:nil 
+                                     otherButtonTitles:nil]autorelease];
+    //sheet.tag = kActionSheetTagTips;
+    [sheet showInView:self.view];
     
+    //
+    /*NSString* newIcon = @"temp";
+    if([_accountData addSection:newName icon:newIcon])
+    {
+        [self persistentCategoryData];
+    
+        //refresh data
+        [self.tableView reloadData];
+    }
+    else
+    {
+        //TODO::conflicted name in this section 
+        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"duplicatedAccountCategory", "") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
+        [alert show];
+    }*/
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {

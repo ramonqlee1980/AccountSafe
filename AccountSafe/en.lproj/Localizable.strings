@@ -58,6 +58,7 @@ CFBundleDisplayName="AccountSafe";
 "Save"="Save";
 
 "try2delete" = "Warning:Are you sure to delete permanently?";
+"duplicatedAccountCategory" = "Duplicate Account Category";
 
 "enterPasswordPlaceholder"="Enter passcode";
 "requiredPlaceholder" = "required";

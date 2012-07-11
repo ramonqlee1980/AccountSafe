@@ -60,6 +60,7 @@ CFBundleDisplayName="帳號管家";
 "requiredPlaceholder" = "必填項";
 "optional"="選填項";
 "try2delete" = "警告：永久刪除該帳號?";
+"duplicatedAccountCategory" = "该帐号类型已存在";
 
 "NullName"="名稱不能為空";
 "NullAccount"="帳號不能為空";

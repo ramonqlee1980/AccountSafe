@@ -36,7 +36,7 @@
 -(id)objectOfRow:(NSUInteger)rowIdex inSection:(NSUInteger)sectionIndex;
 -(void)setRowInSection:(id)info inSection:(NSInteger)section;
 -(void)removeObjectAtRow:(NSUInteger)rowIndex inSection:(NSUInteger)sectionIndex;
--(void)addSection:(NSString*)title icon:(NSString*)icon;
+-(BOOL)addSection:(NSString*)title icon:(NSString*)icon;
 
 -(BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile;
 @end

@@ -114,13 +114,19 @@ static AccountData * sSharedInstance;
     //[doc release];??
 #endif
 }
--(void)addSection:(NSString*)title icon:(NSString*)icon
+-(BOOL)addSection:(NSString*)title icon:(NSString*)icon
 {
+    if([_mSectionName containsObject:title])
+    {
+        return NO;
+    }
     if(title!=nil && icon != nil && title.length>0&& icon.length>0)
     {
         [_mSectionName addObject:title];
         [_mSectionNameIcons addObject:icon];
+        [_mData addObject:[[NSMutableArray alloc]initWithObjects:title, nil]];//add to section list
     }
+    return YES;
 }
 -(void)initWithCoreData
 {
