@@ -11,7 +11,10 @@
 #import "CheckViewController.h"
 #import "ProtocolLogManager.h"
 #import "InAppRageIAPHelper.h"
-//#define DEBUG_INIT
+
+#define kAccountCategoryFileNameWithSuffix @"AccountCategory.xml"
+#define kAccountCategoryFileName @"AccountCategory"
+#define kAccountCategoryFileType @"xml"
 
 @interface AppDelegate()
 -(void)transferXMLWhenInstall;
@@ -26,11 +29,20 @@
 @synthesize naviController;
 
 #pragma transferXML
+//transfer xml to doc directory when installing
+//if file exist,just return
 -(void)transferXMLWhenInstall
-{
-    //TODO::transfer xml to doc directory when installing
-    //if file exist,just return
+{    
+    NSString* xmlFileName = [[self applicationDocumentsDirectory]stringByAppendingPathComponent:kAccountCategoryFileNameWithSuffix];
+    NSFileManager* fm = [NSFileManager defaultManager];
+    if([fm fileExistsAtPath:xmlFileName])
+    {
+        return;
+    }
     
+    NSError* error = nil;
+    NSString* bundleXmlFileName = [[NSBundle mainBundle]pathForResource:kAccountCategoryFileName ofType:kAccountCategoryFileType];
+    [fm copyItemAtPath:bundleXmlFileName toPath:xmlFileName error:&error];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -39,6 +51,7 @@
     ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
     [mgr removeAllObjects];
 #endif
+    [self transferXMLWhenInstall];
     
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[InAppRageIAPHelper sharedHelper]];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];

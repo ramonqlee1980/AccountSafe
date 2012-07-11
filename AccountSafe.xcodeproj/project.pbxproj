@@ -48,6 +48,7 @@
 		30ACB15615A18BF300BEE726 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */; };
 		30E77110159EE77C00CB96AA /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E7710F159EE77C00CB96AA /* icon-57.png */; };
 		30E77112159EE78C00CB96AA /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E77111159EE78C00CB96AA /* icon-114.png */; };
+		C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */ = {isa = PBXBuildFile; fileRef = C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,7 @@
 		30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		30E7710F159EE77C00CB96AA /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-57.png"; path = "../icon-57.png"; sourceTree = "<group>"; };
 		30E77111159EE78C00CB96AA /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-114.png"; path = "../icon-114.png"; sourceTree = "<group>"; };
+		C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AccountCategory.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		3083B8C11596AA8600E94875 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */,
 				308EE32115A05ECA00FE6C6C /* chat.png */,
 				308EE30C15A05E2F00FE6C6C /* eshopping.png */,
 				308EE30D15A05E2F00FE6C6C /* feedback.png */,
@@ -347,6 +350,7 @@
 				308EE31F15A05E2F00FE6C6C /* wealth.png in Resources */,
 				308EE32215A05ECA00FE6C6C /* chat.png in Resources */,
 				3092292F15AB8AB3003BECF8 /* VIPController.xib in Resources */,
+				C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +463,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccountSafe/AccountSafe-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "AccountSafe/AccountSafe-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -471,7 +481,13 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "AccountSafe/AccountSafe-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "AccountSafe/AccountSafe-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lxml2",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
