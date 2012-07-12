@@ -32,9 +32,12 @@
 
 //row number in section
 -(NSUInteger)numberOfRowsInSection:(NSUInteger)sectionIndex;
+
 //row data in section
 -(id)objectOfRow:(NSUInteger)rowIdex inSection:(NSUInteger)sectionIndex;
 -(void)setRowInSection:(id)info inSection:(NSInteger)section;
+
+-(void)removeSectionAtIndex:(NSUInteger)index;
 -(void)removeObjectAtRow:(NSUInteger)rowIndex inSection:(NSUInteger)sectionIndex;
 -(BOOL)addSection:(NSString*)title icon:(NSString*)icon;
 

@@ -17,6 +17,7 @@
 
 
 #define kTitleRow 0
+#define kCategoryRowStart (kTitleRow+1)
 #define kTitleFontSize 20
 #define kDetailFontSize 12
 #define kTopMargin 5
@@ -139,18 +140,38 @@
 #pragma tableview delegate
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row != kTitleRow);
+    return TRUE;//(indexPath.row != kTitleRow);
 }
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row != kTitleRow && editingStyle == UITableViewCellEditingStyleDelete) {
-        AccountInfo* info = [_accountData objectOfRow:indexPath.row inSection:indexPath.section]; 
-        ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
-        [mgr removeObject:info];
-        
-        [_accountData removeObjectAtRow:indexPath.row inSection:indexPath.section];
-        
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if(indexPath.row == kTitleRow)
+        {
+            //remove from coredata starting from 1 to max row
+            AccountInfo* info = nil;
+            NSInteger rowCount = [_accountData numberOfRowsInSection:indexPath.section];            
+            if(rowCount>kCategoryRowStart)
+            {
+                ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
+                for (NSInteger i = kCategoryRowStart; i < rowCount; ++i) {
+                    info = [_accountData objectOfRow:i inSection:indexPath.section];
+                    [mgr removeObject:info];
+                }
+            }
+            
+            [_accountData removeSectionAtIndex:indexPath.section];
+            [self persistentCategoryData];
+            [self.tableView reloadData];
+        }
+        else {
+            AccountInfo* info = [_accountData objectOfRow:indexPath.row inSection:indexPath.section]; 
+            ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
+            [mgr removeObject:info];
+            
+            [_accountData removeObjectAtRow:indexPath.row inSection:indexPath.section];
+            
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
     }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -232,7 +253,7 @@
 											  otherButtonTitles:NSLocalizedString(@"Ok", ""),nil];
 	
 	[alertView addTextFieldWithValue:@"" label:NSLocalizedString(@"Name", "")];	
-
+    
 	[[alertView textFieldAtIndex:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];
 	
 	[alertView show];

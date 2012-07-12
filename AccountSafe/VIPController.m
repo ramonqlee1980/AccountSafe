@@ -147,7 +147,7 @@
 
 - (void)timeout:(id)arg {
     
-    _hud.labelText = @"Timeout! Please try again later.";
+    _hud.labelText = @"Timeout,try again later.";
     //_hud.detailsLabelText = @"Please try again later.";
     //_hud.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
 	//_hud.mode = MBProgressHUDModeCustomView;

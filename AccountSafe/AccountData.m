@@ -128,6 +128,16 @@ static AccountData * sSharedInstance;
     }
     return YES;
 }
+-(void)removeSectionAtIndex:(NSUInteger)index
+{
+    if (index < _mSectionName.count) {
+        [_mSectionName removeObjectAtIndex:index];
+        [_mSectionNameIcons removeObjectAtIndex:index];
+        
+        [[_mData objectAtIndex:index]release];      
+        [_mData removeObjectAtIndex:index];
+    }
+}
 -(void)initWithCoreData
 {
     ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
