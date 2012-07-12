@@ -116,7 +116,7 @@ static AccountData * sSharedInstance;
 }
 -(BOOL)addSection:(NSString*)title icon:(NSString*)icon
 {
-    if([_mSectionName containsObject:title])
+    if(title==nil || icon==nil || title.length==0 || [_mSectionName containsObject:title])
     {
         return NO;
     }

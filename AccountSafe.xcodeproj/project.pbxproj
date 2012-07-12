@@ -46,10 +46,10 @@
 		30ACB14D15A18A6700BEE726 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 30ACB14915A18A6700BEE726 /* Reachability.m */; };
 		30ACB15415A18BB800BEE726 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30ACB15315A18BB800BEE726 /* StoreKit.framework */; };
 		30ACB15615A18BF300BEE726 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */; };
-		30C142EA15AE39E800FE2D7B /* UITextFieldActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 30C142E915AE39E800FE2D7B /* UITextFieldActionSheet.m */; };
 		30E77110159EE77C00CB96AA /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E7710F159EE77C00CB96AA /* icon-57.png */; };
 		30E77112159EE78C00CB96AA /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E77111159EE78C00CB96AA /* icon-114.png */; };
 		C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */ = {isa = PBXBuildFile; fileRef = C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */; };
+		C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,12 +112,12 @@
 		30ACB14915A18A6700BEE726 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		30ACB15315A18BB800BEE726 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		30C142E815AE39E800FE2D7B /* UITextFieldActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldActionSheet.h; sourceTree = "<group>"; };
-		30C142E915AE39E800FE2D7B /* UITextFieldActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldActionSheet.m; sourceTree = "<group>"; };
 		30E7710F159EE77C00CB96AA /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-57.png"; path = "../icon-57.png"; sourceTree = "<group>"; };
 		30E77111159EE78C00CB96AA /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-114.png"; path = "../icon-114.png"; sourceTree = "<group>"; };
 		C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AccountCategory.xml; sourceTree = "<group>"; };
 		C18A112115AD24A1005D3E8A /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		C191CDA515AE625E007FC95A /* EGOTextFieldAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTextFieldAlertView.h; sourceTree = "<group>"; };
+		C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextFieldAlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,8 +286,8 @@
 		30C142E615AE398400FE2D7B /* Auxillary */ = {
 			isa = PBXGroup;
 			children = (
-				30C142E815AE39E800FE2D7B /* UITextFieldActionSheet.h */,
-				30C142E915AE39E800FE2D7B /* UITextFieldActionSheet.m */,
+				C191CDA515AE625E007FC95A /* EGOTextFieldAlertView.h */,
+				C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */,
 			);
 			name = Auxillary;
 			sourceTree = "<group>";
@@ -391,7 +391,7 @@
 				30ACB14D15A18A6700BEE726 /* Reachability.m in Sources */,
 				3092292E15AB8AB3003BECF8 /* VIPController.m in Sources */,
 				308E338B15ACE8D200CCF777 /* GDataXMLNode.m in Sources */,
-				30C142EA15AE39E800FE2D7B /* UITextFieldActionSheet.m in Sources */,
+				C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

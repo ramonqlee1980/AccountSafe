@@ -14,7 +14,6 @@
 #import "GDataXMLNode.h"
 #import "constants.h"
 #import "AppDelegate.h"
-#import "UITextFieldActionSheet.h"
 
 
 #define kTitleRow 0
@@ -150,7 +149,7 @@
         [mgr removeObject:info];
         
         [_accountData removeObjectAtRow:indexPath.row inSection:indexPath.section];
-                
+        
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
@@ -201,33 +200,44 @@
     NSString* xmlFileName = [[delegate applicationDocumentsDirectory]stringByAppendingPathComponent:kAccountCategoryFileNameWithSuffix];
     [_accountData writeToFile:xmlFileName atomically:YES];
 }
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+#define kOK 1
+    if (buttonIndex == kOK) {
+        UITextField* f = [alertView textFieldAtIndex:0];
+        NSString* newName = f.text;
+        NSString* newIcon = @"temp";
+        if([_accountData addSection:newName icon:newIcon])
+        {
+            [self persistentCategoryData];
+            
+            //refresh data
+            [self.tableView reloadData];
+        }
+        else
+        {
+            //TODO::conflicted name in this section 
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"duplicatedAccountCategory", "") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
+            [alert show];
+        }
+    }
+}
 -(IBAction)addAccountCategory:(id)sender
 {
     //TODO:get new name
     //NSString* newName = @"wealth";    
-    UITextFieldActionSheet* sheet = [[[UITextFieldActionSheet alloc] 
-                                     initWithImage:@"添加的图案可用以下方式调整" 
-                                     delegate:nil cancelButtonTitle:@"知道了" 
-                                     destructiveButtonTitle:nil 
-                                     otherButtonTitles:nil]autorelease];
-    //sheet.tag = kActionSheetTagTips;
-    [sheet showInView:self.view];
-    
-    //
-    /*NSString* newIcon = @"temp";
-    if([_accountData addSection:newName icon:newIcon])
-    {
-        [self persistentCategoryData];
-    
-        //refresh data
-        [self.tableView reloadData];
-    }
-    else
-    {
-        //TODO::conflicted name in this section 
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"duplicatedAccountCategory", "") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
-        [alert show];
-    }*/
+	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"New Account Category"
+														message:@""
+													   delegate:self
+											  cancelButtonTitle:@"Cancel"
+											  otherButtonTitles:@"Ok",nil];
+	
+	[alertView addTextFieldWithValue:@"" label:@"Name"];	
+
+	[[alertView textFieldAtIndex:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];
+	
+	[alertView show];
+	[alertView autorelease];    
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {
@@ -255,7 +265,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-        
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -279,7 +289,7 @@
     [_accountData release];
     _accountData = nil;
     [_tableView release];
-
+    
     
     [super dealloc];
 }

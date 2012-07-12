@@ -10,7 +10,7 @@
 
 
 @class AccountData;
-@interface AccountSummaryController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface AccountSummaryController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     UITableView* _tableView;
     AccountData* _accountData;
