@@ -224,15 +224,14 @@
 }
 -(IBAction)addAccountCategory:(id)sender
 {
-    //TODO:get new name
-    //NSString* newName = @"wealth";    
-	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"New Account Category"
+    //get new name     
+	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewAccountCategory", "")
 														message:@""
 													   delegate:self
-											  cancelButtonTitle:@"Cancel"
-											  otherButtonTitles:@"Ok",nil];
+											  cancelButtonTitle:NSLocalizedString(@"Cancel", "")
+											  otherButtonTitles:NSLocalizedString(@"Ok", ""),nil];
 	
-	[alertView addTextFieldWithValue:@"" label:@"Name"];	
+	[alertView addTextFieldWithValue:@"" label:NSLocalizedString(@"Name", "")];	
 
 	[[alertView textFieldAtIndex:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];
 	
