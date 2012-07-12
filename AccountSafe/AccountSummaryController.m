@@ -195,6 +195,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = NSLocalizedString(@"TabTitleSummary", "");
+        self.tabBarItem.image = [UIImage imageNamed:@"first"];
     }
     return self;
 }
@@ -268,8 +270,7 @@
 }
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
-{  
-    self.title = NSLocalizedString(@"TabTitleSummary", "");
+{      
     //self.navigationItem.hidesBackButton = YES;
     [self setRightClick:@"" buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
     _accountData = [AccountData shareInstance];

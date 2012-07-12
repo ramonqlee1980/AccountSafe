@@ -44,6 +44,7 @@
     if (self) {
         // Custom initialization
         self.title = NSLocalizedString(@"TabTitleVIP", "");
+        self.tabBarItem.image = [UIImage imageNamed:@"second"];
     }
     return self;
 }
@@ -62,6 +63,8 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
+    
+    
     // Do any additional setup after loading the view from its nib.
     if(![VIPController isPurchased])
     {
