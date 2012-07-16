@@ -54,6 +54,8 @@
 		30E77112159EE78C00CB96AA /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E77111159EE78C00CB96AA /* icon-114.png */; };
 		C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */ = {isa = PBXBuildFile; fileRef = C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */; };
 		C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */; };
+		C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AD3D5215B3E58E0058630D /* TimePickerController.m */; };
+		C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1AD3D5315B3E58E0058630D /* TimePickerController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +130,9 @@
 		C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextFieldAlertView.m; sourceTree = "<group>"; };
 		C1AD3D3F15B3B9B00058630D /* AccountDetails_alarm_added.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_alarm_added.xcdatamodel; sourceTree = "<group>"; };
 		C1AD3D4115B3BC610058630D /* AccountDetails_attribute_rename.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_attribute_rename.xcdatamodel; sourceTree = "<group>"; };
+		C1AD3D5115B3E58E0058630D /* TimePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePickerController.h; sourceTree = "<group>"; };
+		C1AD3D5215B3E58E0058630D /* TimePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePickerController.m; sourceTree = "<group>"; };
+		C1AD3D5315B3E58E0058630D /* TimePickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimePickerController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +230,7 @@
 		308918B71596CAAD000B5BE7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C1AD3D5315B3E58E0058630D /* TimePickerController.xib */,
 				30C142E615AE398400FE2D7B /* Auxillary */,
 				3092292D15AB8AB3003BECF8 /* VIPController.xib */,
 				3083B8CF1596AA8700E94875 /* CheckViewController_iPhone.xib */,
@@ -254,6 +260,8 @@
 		308D2BC21597C9A000B8AD88 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C1AD3D5115B3E58E0058630D /* TimePickerController.h */,
+				C1AD3D5215B3E58E0058630D /* TimePickerController.m */,
 				3082D50D15974B50009D78FA /* AccountSummaryController.h */,
 				3082D50E15974B50009D78FA /* AccountSummaryController.m */,
 				3083B8CC1596AA8700E94875 /* CheckViewController.h */,
@@ -384,6 +392,7 @@
 				30AFCAE115AF81FA00EAB715 /* first@2x.png in Resources */,
 				30AFCAE215AF81FA00EAB715 /* second.png in Resources */,
 				30AFCAE315AF81FA00EAB715 /* second@2x.png in Resources */,
+				C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +419,7 @@
 				3092292E15AB8AB3003BECF8 /* VIPController.m in Sources */,
 				308E338B15ACE8D200CCF777 /* GDataXMLNode.m in Sources */,
 				C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */,
+				C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

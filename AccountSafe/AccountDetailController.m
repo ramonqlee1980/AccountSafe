@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ProtocolLogManager.h"
 #import "AppDelegate.h"
+#import "TimePickerController.h"
 
 @interface AccountDetailController()
 
@@ -199,6 +200,10 @@
         AccountInfo* info = nil;
         if (update) {
             info = self.accountInfo;
+            //cancel previous notification
+            if (nil != info.alarm) {
+                [AppDelegate cancelLocalNotification:info];
+            }
         }
         else
         {
@@ -211,6 +216,7 @@
         info.password = password.text;
         info.tag = note.text; 
         info.type = [NSNumber numberWithInt:_accountType];
+        //TODO::alarm for this account modification
         info.alarm = [NSDate date];
         
         ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
@@ -222,7 +228,7 @@
             [mgr addObject:info];   
         }    
         
-        //TODO::add alarm
+        //add alarm
         [AppDelegate scheduleLocalNotification:info];
         
         [self.navigationController popViewControllerAnimated:YES];
@@ -265,5 +271,10 @@
     
     return errString;
 }
-
+-(IBAction)setAlarm:(id)sender
+{
+    UIViewController *ctrl = [[TimePickerController alloc]initWithNibName:@"TimePickerController" bundle:nil];
+    [self.navigationController pushViewController:ctrl animated:YES];
+    [ctrl release];
+}
 @end

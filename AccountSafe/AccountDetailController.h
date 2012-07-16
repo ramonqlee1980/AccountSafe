@@ -30,6 +30,7 @@
 @property (nonatomic,assign) IBOutlet UITextField* date;
 @property (nonatomic,assign) IBOutlet UITextField* time;
 
+-(IBAction)setAlarm:(id)sender;
 -(IBAction)rightItemClickDelete:(id)sender;
 -(IBAction)rightItemClickSave:(id)sender;
 @end
