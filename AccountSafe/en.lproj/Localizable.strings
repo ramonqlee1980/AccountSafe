@@ -59,6 +59,7 @@ CFBundleDisplayName="AccountSafe";
 "Save"="Save";
 "NewAccountCategory"="Create New Account Category";
 "time2ModifyPasscode" = "It's time to change your %@ passcode!";
+"alarmButton"="remind to change";
 
 "try2delete" = "Warning:Are you sure to delete permanently?";
 "duplicatedAccountCategory" = "Duplicate Account Category";

@@ -38,6 +38,7 @@
 @synthesize date;
 @synthesize time;
 @synthesize accountInfo;
+@synthesize alarmButton;
 
 - (id)initWithAccountInfo:(NSInteger)accountType accountInfo:(id)data nibNameOrNil:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -146,6 +147,8 @@
     note.layer.borderColor = [UIColor grayColor].CGColor;
     note.layer.borderWidth = 1.0;
     note.layer.cornerRadius = 5.0;
+    
+    [self.alarmButton setTitle:NSLocalizedString(@"alarmButton", "") forState:UIControlStateNormal] ;
     
     BOOL modify = (self.accountInfo!=nil);    
     SEL action = modify?@selector(rightItemClickDelete:):@selector(rightItemClickSave:);

@@ -29,6 +29,7 @@
 @property (nonatomic,assign) IBOutlet UISwitch* alarmEnable;
 @property (nonatomic,assign) IBOutlet UITextField* date;
 @property (nonatomic,assign) IBOutlet UITextField* time;
+@property (nonatomic,assign) IBOutlet UIButton* alarmButton;
 
 -(IBAction)setAlarm:(id)sender;
 -(IBAction)rightItemClickDelete:(id)sender;
