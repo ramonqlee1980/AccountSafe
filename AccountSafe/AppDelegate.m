@@ -12,6 +12,7 @@
 #import "ProtocolLogManager.h"
 #import "InAppRageIAPHelper.h"
 #import "constants.h"
+#import "AccountInfo.h"
 
 
 @interface AppDelegate()
@@ -66,6 +67,8 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -227,5 +230,55 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
     return basePath;
+}
+
+
+#pragma mark localNotification
+#define kTime2ModifyPasscode @"time2ModifyPasscode"
+
++(void)scheduleLocalNotification:(AccountInfo*)info
+{
+    if(info==nil)
+    {
+        return;
+    }
+        
+    UILocalNotification *notification=[[UILocalNotification alloc] init]; 
+    if (notification!=nil) { 
+        notification.fireDate=info.alarm; 
+        notification.timeZone=[NSTimeZone defaultTimeZone]; 
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.applicationIconBadgeNumber = notification.applicationIconBadgeNumber+1;
+
+        notification.alertBody=[NSString stringWithFormat:NSLocalizedString(kTime2ModifyPasscode,""),info.name]; 
+        NSLog(@"notification alertBody:%@",notification.alertBody);
+        [[UIApplication sharedApplication]   scheduleLocalNotification:notification];
+        NSLog(@"scheduleLocalNotification:%@",notification);
+    }    
+    [notification release]; 
+}
+
++(void)cancelLocalNotification:(AccountInfo*)info
+{
+    if (nil==info) {
+        return;
+    }
+    UILocalNotification *notification=[[UILocalNotification alloc] init]; 
+    if (notification!=nil) { 
+        notification.fireDate=info.alarm; 
+        notification.timeZone=[NSTimeZone defaultTimeZone]; 
+        notification.soundName = UILocalNotificationDefaultSoundName;
+        notification.applicationIconBadgeNumber = notification.applicationIconBadgeNumber+1;
+        notification.alertBody=[NSString stringWithFormat:NSLocalizedString(kTime2ModifyPasscode,""),info.name];
+        [[UIApplication sharedApplication]   cancelLocalNotification:notification];
+        NSLog(@"cancelLocalNotification::%@",notification);
+    }    
+    [notification release]; 
+}
+
++ (void)cancelAllLocalNotifications
+{
+    [[UIApplication sharedApplication]cancelAllLocalNotifications];
+    NSLog(@"cancelAllLocalNotifications");
 }
 @end

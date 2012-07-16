@@ -46,6 +46,7 @@ CFBundleDisplayName="AccountSafe";
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
 
+//
 "Add"="Add";
 "Purchase"="Purchase";
 "Set"="Set";
@@ -57,6 +58,7 @@ CFBundleDisplayName="AccountSafe";
 "Delete"="Delete";
 "Save"="Save";
 "NewAccountCategory"="Create New Account Category";
+"time2ModifyPasscode" = "It's time to change your %@ passcode!";
 
 "try2delete" = "Warning:Are you sure to delete permanently?";
 "duplicatedAccountCategory" = "Duplicate Account Category";

@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class CheckViewController;
+@class AccountInfo;
 
 #define kInAppPurchaseProductName @"com.idreems.AccountSafe"
 
 #define MANAGED_CONTEXT [((AppDelegate*)[[UIApplication sharedApplication]delegate]) managedObjectContext]
+#define APPDELEGATE    [[UIApplication sharedApplication]delegate]
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -30,5 +32,9 @@
 
 @property (strong, nonatomic) CheckViewController *viewController;
 @property (strong, nonatomic) UINavigationController *naviController;
+
++(void)scheduleLocalNotification:(AccountInfo*)info;
++(void)cancelLocalNotification:(AccountInfo*)info;
++(void)cancelAllLocalNotifications;
 
 @end

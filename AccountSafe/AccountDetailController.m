@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "ProtocolLogManager.h"
-
+#import "AppDelegate.h"
 
 @interface AccountDetailController()
 
@@ -222,6 +222,8 @@
             [mgr addObject:info];   
         }    
         
+        //TODO::add alarm
+        [AppDelegate scheduleLocalNotification:info];
         
         [self.navigationController popViewControllerAnimated:YES];
     }

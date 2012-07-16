@@ -62,6 +62,7 @@ CFBundleDisplayName="帳號管家";
 "try2delete" = "警告：永久刪除該帳號?";
 "duplicatedAccountCategory" = "该帐号类型已存在";
 "NewAccountCategory"="创建新的帐号类型";
+"time2ModifyPasscode" = "It's time to change your %@ passcode!";
 
 "NullName"="名稱不能為空";
 "NullAccount"="帳號不能為空";
