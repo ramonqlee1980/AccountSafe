@@ -12,7 +12,8 @@
 #define kTimePicker 1
 
 @interface TimePickerController ()
-
+-(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
+-(IBAction)saveAlarm:(id)sender;
 @end
 
 @implementation TimePickerController
@@ -28,11 +29,23 @@
     [timePicker release];
     [super dealloc];
 }
-
+-(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
+{
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:buttonName style:UIBarButtonItemStyleBordered target:self action:action];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    self.navigationItem.title = title;    
+    [rightItem release];
+}
+-(IBAction)saveAlarm:(id)sender
+{
+    //TODO::save alarm ,global account data?
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    [self setRightClick:@"" buttonName:NSLocalizedString(@"Save", "") action:@selector(saveAlarm:)];
+    //_accountData = [AccountData shareInstance];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

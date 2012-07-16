@@ -276,6 +276,11 @@
 }
 -(IBAction)setAlarm:(id)sender
 {
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:nil action:nil];
+    self.navigationItem.backBarButtonItem = backItem;   
+    [backItem release];
+
+    
     UIViewController *ctrl = [[TimePickerController alloc]initWithNibName:@"TimePickerController" bundle:nil];
     [self.navigationController pushViewController:ctrl animated:YES];
     [ctrl release];
