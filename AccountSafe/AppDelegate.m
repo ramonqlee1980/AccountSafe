@@ -26,7 +26,7 @@
 @synthesize viewController = _viewController;
 @synthesize naviController;
 
-#pragma transferXML
+#pragma mark transferXML
 //transfer xml to doc directory when installing
 //if file exist,just return
 -(void)transferXMLWhenInstall
@@ -47,6 +47,7 @@
     [fm copyItemAtPath:bundleXmlFileName toPath:xmlFileName error:&error];
 }
 
+#pragma mark app LifeCycle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
 #ifdef DEBUG_INIT
@@ -198,13 +199,17 @@
     if (persistentStoreCoordinator != nil) {
         return persistentStoreCoordinator;
     }
-	
+
     NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"AccountDetails.sqlite"]];
 	
 	NSError *error;
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
     persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
         // Handle the error.
+        NSLog(@"addPersistentStoreWithType error:%@",error);
     }    
 	
     return persistentStoreCoordinator;

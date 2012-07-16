@@ -126,6 +126,8 @@
 		C18A112115AD24A1005D3E8A /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		C191CDA515AE625E007FC95A /* EGOTextFieldAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTextFieldAlertView.h; sourceTree = "<group>"; };
 		C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextFieldAlertView.m; sourceTree = "<group>"; };
+		C1AD3D3F15B3B9B00058630D /* AccountDetails_alarm_added.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_alarm_added.xcdatamodel; sourceTree = "<group>"; };
+		C1AD3D4115B3BC610058630D /* AccountDetails_attribute_rename.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_attribute_rename.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -553,9 +555,11 @@
 		308EE8B8159BC6E400166A6D /* AccountDetails.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				C1AD3D4115B3BC610058630D /* AccountDetails_attribute_rename.xcdatamodel */,
+				C1AD3D3F15B3B9B00058630D /* AccountDetails_alarm_added.xcdatamodel */,
 				308EE8B9159BC6E400166A6D /* AccountDetails.xcdatamodel */,
 			);
-			currentVersion = 308EE8B9159BC6E400166A6D /* AccountDetails.xcdatamodel */;
+			currentVersion = C1AD3D4115B3BC610058630D /* AccountDetails_attribute_rename.xcdatamodel */;
 			path = AccountDetails.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -2,12 +2,13 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="AccountInfo" representedClassName="AccountInfo" syncable="YES">
         <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="alarm" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AccountInfo" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="AccountInfo" positionX="160" positionY="192" width="128" height="135"/>
     </elements>
 </model>

@@ -14,18 +14,8 @@
 @dynamic name;
 @dynamic account;
 @dynamic password;
-@dynamic note;
+@dynamic tag;
 @dynamic type;
-/*
--(void)assign:(id)obj
-{
-    if ([obj isKindOfClass:[AccountInfo class]]) {   
-        AccountInfo* info =(AccountInfo*)obj;
-        self.name = info.name;
-        self.account = info.account;
-        self.password = info.password;
-        self.note =  info.note;        
-        self.type = info.type;
-    }
-}*/
+@dynamic alarm;
+
 @end

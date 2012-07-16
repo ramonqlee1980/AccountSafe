@@ -18,8 +18,8 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * account;
 @property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSString * note;
+@property (nonatomic, retain) NSString * tag;
 @property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSDate   * alarm;
 
-//-(void)assign:(id)obj;
 @end

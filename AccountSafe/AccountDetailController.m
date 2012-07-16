@@ -122,7 +122,7 @@
         name.text = info.name;
         account.text = info.account;
         password.text = info.password;
-        note.text = info.note;
+        note.text = info.tag;
     }
     
     self.nameLabel.text = NSLocalizedString(@"Name", "");    
@@ -209,8 +209,9 @@
         info.name = name.text;
         info.account = account.text;
         info.password = password.text;
-        info.note = note.text; 
+        info.tag = note.text; 
         info.type = [NSNumber numberWithInt:_accountType];
+        info.alarm = [NSDate date];
         
         ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
         if (update) {
