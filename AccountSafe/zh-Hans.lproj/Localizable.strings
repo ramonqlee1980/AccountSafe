@@ -41,6 +41,8 @@ CFBundleDisplayName="帐号管家";
 "kVIPSetAlarmKey"="设置修改密码提醒";
 "kVIPMoreFeaturesKey" = "更多专属权利即将提供";
 
+"vipFeatures"="此项功能为VIP 专属功能";
+
 "NullName"="名称不能为空";
 "NullAccount"="帐号不能为空";
 "NullPassword"="密码不能为空";

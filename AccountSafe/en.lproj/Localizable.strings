@@ -28,7 +28,7 @@ CFBundleDisplayName="AccountSafe";
 "Cancel"="Cancel";
 "Delete"="Delete";
 "Save"="Save";
-"NewAccountCategory"="Create New Account Category";
+"NewAccountCategory"="Add account category";
 "time2ModifyPasscode" = "It's time to change your %@ passcode!";
 
 //vip feature
@@ -38,6 +38,7 @@ CFBundleDisplayName="AccountSafe";
 "kVIPSetAlarmKey"="Set alarm to change passcode";
 "kVIPMoreFeaturesKey" = "More features coming soon";
 
+"vipFeatures"="Features for VIP users only";
 
 "try2delete" = "Warning:Are you sure to delete permanently?";
 "duplicatedAccountCategory" = "Duplicate Account Category";

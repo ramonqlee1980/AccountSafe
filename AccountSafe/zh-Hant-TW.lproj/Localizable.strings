@@ -41,6 +41,8 @@ CFBundleDisplayName="帳號管家";
 "kVIPSetAlarmKey"="Set alarm to change passcode";
 "kVIPMoreFeaturesKey" = "More features coming soon";
 
+"vipFeatures"="Features for VIP users only";
+
 "NullName"="名稱不能為空";
 "NullAccount"="帳號不能為空";
 "NullPassword"="密碼不能為空";

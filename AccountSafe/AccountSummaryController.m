@@ -81,13 +81,11 @@
         NSString* iconName = [_accountData nameOfSectionIcon:indexPath.section];     
         NSString *iconPath = [[NSBundle mainBundle] pathForResource:[iconName lowercaseString] ofType:@"png"];
         cell.imageView.image = [[[UIImage alloc]initWithContentsOfFile:iconPath]autorelease];
-        //cell.imageView.backgroundColor = [UIColor clearColor];
         NSLog(@"rowHeight:%f", self.tableView.rowHeight);
         
         cell.textLabel.text = sectionName;  
         cell.textLabel.font = [UIFont systemFontOfSize:kTitleFontSize];
         cell.textLabel.textColor = [UIColor blueColor];
-        //cell.textLabel.backgroundColor = [UIColor clearColor];
         
         if(accessoryLabel)
         {
@@ -108,27 +106,17 @@
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:kDetailFontSize];
         cell.textLabel.textColor = [UIColor orangeColor];
-        //cell.textLabel.backgroundColor = [UIColor clearColor];
         
         
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"Account", ""),rowData.account];
         cell.detailTextLabel.textAlignment = UITextAlignmentCenter;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kDetailFontSize];
         cell.detailTextLabel.textColor = [UIColor orangeColor];
-        //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        //cell.accessoryView.backgroundColor = [UIColor clearColor];
     }
-    NSLog(@"cellForRowAtIndexPath:%@",cell.textLabel.text );    
+    NSLog(@"cellForRowAtIndexPath:%@",cell.textLabel.text );   
     
-    //disable some sections for trial version
-    /*UIColor* color = [UIColor whiteColor];
-    UIView* backgroundView = [[UIView alloc]initWithFrame:cell.frame];
-    backgroundView.backgroundColor = color;
-    cell.backgroundView = backgroundView;
-    [backgroundView release];
-    */    
     
     return cell;
 }
@@ -144,6 +132,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         if(indexPath.row == kTitleRow)
         {
+            VIP_FEATURES_TIP
             //remove from coredata starting from 1 to max row
             AccountInfo* info = nil;
             NSInteger rowCount = [_accountData numberOfRowsInSection:indexPath.section];            
@@ -224,7 +213,19 @@
 {
 #define kOK 1
     if (buttonIndex == kOK) {
-        UITextField* f = [alertView textFieldAtIndex:0];
+        UITextField* f = nil;//[alertView textFieldAtIndex:0];
+        //find textfield
+        NSArray* subviews = [alertView subviews];
+        for (id view in subviews) {
+            if([view isKindOfClass:[UITextField class]])
+            {
+                f = (UITextField*)view;
+                break;
+            }
+        }
+        if (nil==f || nil == f.text || 0 == f.text.length) {
+            return;
+        }
         NSString* newName = f.text;
         NSString* newIcon = @"temp";
         if([_accountData addSection:newName icon:newIcon])
@@ -236,7 +237,7 @@
         }
         else
         {
-            //TODO::conflicted name in this section 
+            //conflicted name in this section 
             UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"duplicatedAccountCategory", "") delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
             [alert show];
         }
@@ -244,19 +245,22 @@
 }
 -(IBAction)addAccountCategory:(id)sender
 {
-    //get new name     
-	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewAccountCategory", "")
-														message:@""
-													   delegate:self
-											  cancelButtonTitle:NSLocalizedString(@"Cancel", "")
-											  otherButtonTitles:NSLocalizedString(@"OK", ""),nil];
-	
-	[alertView addTextFieldWithValue:@"" label:NSLocalizedString(@"Name", "")];	
+    VIP_FEATURES_TIP;
+    // Ask for Username and password.
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewAccountCategory", "") message:@"\n" delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", "") otherButtonTitles:NSLocalizedString(@"OK", ""), nil];
+    // Adds a username Field
+    UITextField* utextfield = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)]; 
+    utextfield.placeholder = NSLocalizedString(@"Name", "");
+    [utextfield setBackgroundColor:[UIColor whiteColor]];
+    utextfield.enablesReturnKeyAutomatically = YES;
+    [utextfield setReturnKeyType:UIReturnKeyDone];    
+    [utextfield performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];    
+    [alertView addSubview:utextfield];
+    [utextfield release];
     
-	[[alertView textFieldAtIndex:0] performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];
-	
-	[alertView show];
-	[alertView autorelease];    
+    // Show alert on screen.
+    [alertView show];
+    [alertView release];
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {

@@ -11,10 +11,21 @@
 @class CheckViewController;
 @class AccountInfo;
 
+#define kDebugVersion NO//for test only
+
 #define kInAppPurchaseProductName @"com.idreems.AccountSafe"
 
 #define MANAGED_CONTEXT [((AppDelegate*)[[UIApplication sharedApplication]delegate]) managedObjectContext]
 #define APPDELEGATE    [[UIApplication sharedApplication]delegate]
+
+#define VIP_FEATURES_TIP if (![AppDelegate isPurchased])\
+                            {\
+                            NSString* ret = NSLocalizedString(@"vipFeatures", "");\
+                            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:ret delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil, nil]autorelease];\
+                            [alert show];\
+                            return;\
+                            }
+
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
@@ -39,4 +50,5 @@
 
 
 +(BOOL)isPurchased;
+
 @end

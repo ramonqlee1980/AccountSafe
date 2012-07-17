@@ -288,6 +288,10 @@
 }
 +(BOOL)isPurchased
 {
+    if (kDebugVersion == YES) {
+        return YES;
+    }
+    
     BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
     NSLog(@"isPurchased:%d",r);
     return r;

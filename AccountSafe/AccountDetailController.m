@@ -151,7 +151,9 @@
     
     self.alarmLabel.text = NSLocalizedString(@"alarmLabel", "");
     NSString* btnTitle = (nil!=_accountInfo)?([TimePickerController stringFromDate:((AccountInfo*)_accountInfo).alarm string:kDateFormatYMDHHmm]):NSLocalizedString(@"alarmButton", "");
-    
+    if (nil == btnTitle || btnTitle.length == 0) {
+        btnTitle = NSLocalizedString(@"alarmButton", "");
+    }
     [self.alarmButton setTitle:btnTitle forState:UIControlStateNormal];
     
     BOOL modify = (self.accountInfo!=nil);    
@@ -270,15 +272,13 @@
         [errString appendString:@"\n"];        
     }
     
-    /*if (password.text.length==0) {
-        [errString appendString:NSLocalizedString(@"NullPassword","")];
-        [errString appendString:@"\n"];        
-    }*/
-    
+   
     return errString;
 }
 -(IBAction)setAlarm:(id)sender
 {
+    VIP_FEATURES_TIP
+    
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backItem;   
     [backItem release];
