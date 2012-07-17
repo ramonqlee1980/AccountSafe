@@ -66,13 +66,19 @@
         
     [self.window makeKeyAndVisible];
     
-    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];        
-    application.applicationIconBadgeNumber = 0;    
+    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if(application.applicationIconBadgeNumber>0)
+    {
+        application.applicationIconBadgeNumber = application.applicationIconBadgeNumber-1;    
+    }
     
     return YES;
 }
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {        
-    application.applicationIconBadgeNumber = 0;    
+    if(application.applicationIconBadgeNumber>0)
+    {
+        application.applicationIconBadgeNumber = application.applicationIconBadgeNumber-1;    
+    }   
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

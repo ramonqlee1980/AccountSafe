@@ -32,7 +32,7 @@ CFBundleDisplayName="帐号管家";
 "try2delete" = "警告：删除后将不能恢复，确定删除?";
 "duplicatedAccountCategory" = "该帐号类型已存在";
 "NewAccountCategory"="创建新的帐号类型";
-"time2ModifyPasscode" = "温馨提示：您的帐号 %@ 该修改密码啦!";
+"time2ModifyPasscode" = "温馨提示：您的帐号 %@ 需要修改密码啦!";
 
 //vip feature
 "kVIPFeatureListTitle"="VIP 专属权利";
