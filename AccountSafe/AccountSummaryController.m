@@ -57,8 +57,7 @@
         if(indexPath.row==kTitleRow)
         {
             //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            accessoryLabel= [[[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, self.tableView.rowHeight-kTopMargin, self.tableView.rowHeight-kTopMargin)]autorelease];
-            //accessoryLabel.tag = SECONDLABEL_TAG;           
+            accessoryLabel= [[[UILabel alloc]initWithFrame:CGRectMake(0.0, 0.0, self.tableView.rowHeight-kTopMargin, self.tableView.rowHeight-kTopMargin)]autorelease];        
             cell.accessoryView = accessoryLabel;
         }
     }
@@ -82,13 +81,13 @@
         NSString* iconName = [_accountData nameOfSectionIcon:indexPath.section];     
         NSString *iconPath = [[NSBundle mainBundle] pathForResource:[iconName lowercaseString] ofType:@"png"];
         cell.imageView.image = [[[UIImage alloc]initWithContentsOfFile:iconPath]autorelease];
-        cell.imageView.backgroundColor = [UIColor clearColor];
+        //cell.imageView.backgroundColor = [UIColor clearColor];
         NSLog(@"rowHeight:%f", self.tableView.rowHeight);
         
         cell.textLabel.text = sectionName;  
         cell.textLabel.font = [UIFont systemFontOfSize:kTitleFontSize];
         cell.textLabel.textColor = [UIColor blueColor];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
+        //cell.textLabel.backgroundColor = [UIColor clearColor];
         
         if(accessoryLabel)
         {
@@ -109,29 +108,27 @@
         cell.textLabel.textAlignment = UITextAlignmentCenter;
         cell.textLabel.font = [UIFont systemFontOfSize:kDetailFontSize];
         cell.textLabel.textColor = [UIColor orangeColor];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
+        //cell.textLabel.backgroundColor = [UIColor clearColor];
         
         
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@",NSLocalizedString(@"Account", ""),rowData.account];
         cell.detailTextLabel.textAlignment = UITextAlignmentCenter;
         cell.detailTextLabel.font = [UIFont systemFontOfSize:kDetailFontSize];
         cell.detailTextLabel.textColor = [UIColor orangeColor];
-        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        //cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.accessoryView.backgroundColor = [UIColor clearColor];
+        //cell.accessoryView.backgroundColor = [UIColor clearColor];
     }
     NSLog(@"cellForRowAtIndexPath:%@",cell.textLabel.text );    
     
     //disable some sections for trial version
-    UIColor* color = [UIColor whiteColor];   
-    
+    /*UIColor* color = [UIColor whiteColor];
     UIView* backgroundView = [[UIView alloc]initWithFrame:cell.frame];
     backgroundView.backgroundColor = color;
     cell.backgroundView = backgroundView;
     [backgroundView release];
-    
-    
+    */    
     
     return cell;
 }
@@ -252,7 +249,7 @@
 														message:@""
 													   delegate:self
 											  cancelButtonTitle:NSLocalizedString(@"Cancel", "")
-											  otherButtonTitles:NSLocalizedString(@"Ok", ""),nil];
+											  otherButtonTitles:NSLocalizedString(@"OK", ""),nil];
 	
 	[alertView addTextFieldWithValue:@"" label:NSLocalizedString(@"Name", "")];	
     
@@ -276,6 +273,11 @@
     _accountData = [AccountData shareInstance];
     
     self.tabBarController.hidesBottomBarWhenPushed = YES;
+    
+    if([AppDelegate isPurchased])
+    {
+        self.tableView.separatorColor = [UIColor orangeColor];
+    }
     
     [super viewDidLoad];
 }

@@ -14,12 +14,91 @@
 
 @interface VIPController()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
-+(BOOL)isPurchased;
 - (NSString *)localizedPrice:(NSLocale *)priceLocale price:(NSDecimalNumber *)price;
 @end
 
 @implementation VIPController
 @synthesize hud = _hud;
+@synthesize tableView;
+
+#define kVIPFeatureCount 4
+#define kVIPNewCategory 0
+#define kVIPDeleteCategory 1
+#define kVIPSetAlarm 2
+#define kVIPMoreFeatures 3
+
+#define kVIPNewCategoryKey @"kVIPNewCategoryKey"
+#define kVIPDeleteCategoryKey @"kVIPDeleteCategoryKey"
+#define kVIPSetAlarmKey @"kVIPSetAlarmKey"
+#define kVIPMoreFeaturesKey @"kVIPMoreFeaturesKey" 
+
+#define kVIPFeatureListTitle @"kVIPFeatureListTitle"
+
+#pragma  mark tableview datasource 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return kVIPFeatureCount;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+#define kVIPCell @"VIPCell"
+    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:kVIPCell];
+    if (nil==cell) {
+        cell = [[[UITableViewCell alloc]init]autorelease];
+    }
+    
+    //1 category edit
+    //1.1add new category count
+    //1.2delete category
+    NSString* key = nil;
+    
+    //2.alarm to change passcode    
+    switch (indexPath.section) {
+        case kVIPNewCategory:
+            key = kVIPNewCategoryKey;
+            break;
+        case kVIPDeleteCategory:
+            key = kVIPDeleteCategoryKey;
+            break;
+        case kVIPSetAlarm:
+            key = kVIPSetAlarmKey;
+            break;
+        case kVIPMoreFeatures:
+            key = kVIPMoreFeaturesKey;
+        default:
+            break;
+    }
+    
+    if (key) {
+        cell.textLabel.text = NSLocalizedString(key, "");
+    }    
+    
+    return cell;
+}
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    NSString* r = nil;
+    if (section == kVIPNewCategory) {
+        r = NSLocalizedString(kVIPFeatureListTitle, "");
+    }
+    
+    return r;
+}
+
+#pragma mark tableview delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
 
 #pragma in-app purchase
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
@@ -29,14 +108,6 @@
     self.navigationItem.title = title;    
     [rightItem release];
 }
-
-+(BOOL)isPurchased
-{
-    BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
-    NSLog(@"isPurchased:%d",r);
-    return r;
-}
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -63,15 +134,17 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
-    
+    tableView.delegate = self;
+    tableView.dataSource = self;   
     
     // Do any additional setup after loading the view from its nib.
-    if(![VIPController isPurchased])
+    if(![AppDelegate isPurchased])
     {
         [self setRightClick:@"" buttonName:NSLocalizedString(@"Purchase", "") action:@selector(rightItemClickInAppPurchase:)];
     }
     else
     {
+        tableView.separatorColor = [UIColor orangeColor];
         self.navigationItem.rightBarButtonItem = nil;
     }
 }
@@ -94,6 +167,7 @@
 {
     [_hud release];
     _hud = nil;
+    self.tableView = nil;
     [super dealloc];
 }
 
@@ -162,7 +236,7 @@
 // Add new method
 -(IBAction)rightItemClickInAppPurchase:(id)sender
 {   
-    if ([VIPController isPurchased]) {
+    if ([AppDelegate isPurchased]) {
         //        NSString* ret = NSLocalizedString(@"try2delete", "");
         UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"" message:@"purchased already" delegate:self cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
         [alert show];    

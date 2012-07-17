@@ -65,10 +65,15 @@
     [self.window addSubview:naviController.view];
         
     [self.window makeKeyAndVisible];
+    
+    [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];        
+    application.applicationIconBadgeNumber = 0;    
+    
     return YES;
 }
-
-
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {        
+    application.applicationIconBadgeNumber = 0;    
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -280,5 +285,11 @@
 {
     [[UIApplication sharedApplication]cancelAllLocalNotifications];
     NSLog(@"cancelAllLocalNotifications");
+}
++(BOOL)isPurchased
+{
+    BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
+    NSLog(@"isPurchased:%d",r);
+    return r;
 }
 @end

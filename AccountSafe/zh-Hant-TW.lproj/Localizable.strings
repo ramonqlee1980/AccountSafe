@@ -7,46 +7,16 @@
  */
 CFBundleDisplayName="帳號管家";
 
-"AccountTypeCount" = "10";
-
-"TypeName0"="網站論壇";
-"TypeIcon0"="forum";
-
-"TypeName1"="電子郵件";
-"TypeIcon1"="email";
-
-"TypeName2"="遊戲";
-"TypeIcon2"="game";
-
-"TypeName3"="聊天";
-"TypeIcon3"="chat";
-
-"TypeName4"="理財";
-"TypeIcon4"="wealth";
-
-"TypeName5"="微博";
-"TypeIcon5"="microblog";
-
-"TypeName6"="手機相關";
-"TypeIcon6"="mobile";
-
-"TypeName7"="臨時";
-"TypeIcon7"="temp";
-
-"TypeName8"="網購";
-"TypeIcon8"="eshopping";
-
-"TypeName9"="其他";
-"TypeIcon9"="others";
-
 "Account"="帳號: ";
 "Name"="名稱: ";
 "Password"="密碼: ";
 "Note"="備註: ";
+"alarmButton"="Set Date and Time";
+"alarmLabel"="Alarm:";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
-"Add"="Add";
+"Add"="NewCategory";
 "Purchase"="購買";
 "Set"="設置密碼";
 "Enter"="進入";
@@ -63,8 +33,13 @@ CFBundleDisplayName="帳號管家";
 "duplicatedAccountCategory" = "该帐号类型已存在";
 "NewAccountCategory"="创建新的帐号类型";
 "time2ModifyPasscode" = "It's time to change your %@ passcode!";
-"alarmButton"="Set Date and Time";
-"alarmLabel"="Alarm:";
+
+//vip feature
+"kVIPFeatureListTitle"="VIP Features";
+"kVIPNewCategoryKey"="Add new category";
+"kVIPDeleteCategoryKey"="Delete category";
+"kVIPSetAlarmKey"="Set alarm to change passcode";
+"kVIPMoreFeaturesKey" = "More features coming soon";
 
 "NullName"="名稱不能為空";
 "NullAccount"="帳號不能為空";

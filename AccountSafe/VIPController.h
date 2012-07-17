@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 @class MBProgressHUD;
 
-@interface VIPController : UIViewController
+@interface VIPController : UIViewController<UITableViewDelegate,UITableViewDataSource>
 {
     MBProgressHUD *_hud;
 }
 
 @property (retain) MBProgressHUD *hud;
+@property (nonatomic,retain) IBOutlet UITableView* tableView;
 
 -(IBAction)rightItemClickInAppPurchase:(id)sender;
 @end

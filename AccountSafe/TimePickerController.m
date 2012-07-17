@@ -8,6 +8,7 @@
 
 #import "TimePickerController.h"
 #import "AccountDetailController.h"
+#import "AppDelegate.h"
 
 #define kDatePicker 0
 #define kTimePicker 1
@@ -78,7 +79,11 @@
     [timePicker addTarget:self action:@selector(timeValueChanged:) forControlEvents:UIControlEventValueChanged];
     
     tableView.delegate = self;
-    tableView.dataSource = self;    
+    tableView.dataSource = self;
+    if([AppDelegate isPurchased])
+    {
+        tableView.separatorColor = [UIColor orangeColor];
+    }
 
     [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     

@@ -37,4 +37,6 @@
 +(void)cancelLocalNotification:(AccountInfo*)info;
 +(void)cancelAllLocalNotifications;
 
+
++(BOOL)isPurchased;
 @end
