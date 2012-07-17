@@ -38,12 +38,10 @@
 @synthesize noteLabel;
 
 @synthesize note;
-@synthesize alarmEnable;
-@synthesize date;
-@synthesize time;
 @synthesize accountInfo=_accountInfo;
 @synthesize alarmButton;
 @synthesize alarmTime;
+@synthesize alarmLabel;
 
 - (id)initWithAccountInfo:(NSInteger)accountType accountInfo:(id)data nibNameOrNil:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -151,7 +149,10 @@
     note.layer.borderWidth = 1.0;
     note.layer.cornerRadius = 5.0;
     
-    [self.alarmButton setTitle:NSLocalizedString(@"alarmButton", "") forState:UIControlStateNormal] ;
+    self.alarmLabel.text = NSLocalizedString(@"alarmLabel", "");
+    NSString* btnTitle = (nil!=_accountInfo)?([TimePickerController stringFromDate:((AccountInfo*)_accountInfo).alarm string:kDateFormatYMDHHmm]):NSLocalizedString(@"alarmButton", "");
+    
+    [self.alarmButton setTitle:btnTitle forState:UIControlStateNormal];
     
     BOOL modify = (self.accountInfo!=nil);    
     SEL action = modify?@selector(rightItemClickDelete:):@selector(rightItemClickSave:);
@@ -287,6 +288,10 @@
     if (_accountInfo) {
         alarmTimeInit = ((AccountInfo*)_accountInfo).alarm;
     }
+    if(self.alarmTime)
+    {
+        alarmTimeInit = self.alarmTime;
+    }
     if (!alarmTimeInit) {
         alarmTimeInit = [NSDate date];
     }
@@ -305,6 +310,9 @@
         if ( [alarm isKindOfClass:[NSDate class]] ) {
             self.alarmTime = (NSDate*)alarm;
                        
+            NSString* btnTitle = [TimePickerController stringFromDate:self.alarmTime string:kDateFormatYMDHHmm];            
+            [self.alarmButton setTitle:btnTitle forState:UIControlStateNormal];
+            
             [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:NSLocalizedString(@"Save",@"") action:(@selector(rightItemClickSave:))];
         }
     }

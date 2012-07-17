@@ -12,11 +12,7 @@
 #define kDatePicker 0
 #define kTimePicker 1
 
-//date formatter
-#define kDateFormatHHmm @"HH:mm"
-#define kDateFormatYMD @"yyyy-MM-dd"
-#define kDateFormatYMDHHmm @"yyyy-MM-dd HH:mm"
-#define kBlank @" "
+
 
 @interface TimePickerController ()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;

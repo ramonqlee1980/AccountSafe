@@ -19,4 +19,7 @@
 @property (nonatomic,retain) IBOutlet  UITableView* tableView;
 @property (nonatomic,retain) IBOutlet UIDatePicker* datePicker;
 @property (nonatomic,retain) IBOutlet UIDatePicker* timePicker;
+
++(NSString*)stringFromDate:(NSDate*)date string:(NSString*)format;
++(NSDate*)dateFromString:(NSString*)date string:(NSString*)format;
 @end

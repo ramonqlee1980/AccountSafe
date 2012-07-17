@@ -11,6 +11,12 @@
 #define kAlarmTimeNotification @"alarmtime"
 #define kAlarmTime @"alarmTimeSet" 
 
+
+//date formatter
+#define kDateFormatHHmm @"HH:mm"
+#define kDateFormatYMD @"yyyy-MM-dd"
+#define kDateFormatYMDHHmm @"yyyy-MM-dd HH:mm"
+#define kBlank @" "
 @interface AccountDetailController : UIViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate>
 {
     id _accountInfo;
@@ -22,6 +28,7 @@
 @property (nonatomic,assign) IBOutlet UILabel* accountLabel;
 @property (nonatomic,assign) IBOutlet UILabel* passwordLabel;
 @property (nonatomic,assign) IBOutlet UILabel* noteLabel;
+@property (nonatomic,assign) IBOutlet UILabel* alarmLabel;
 
 @property (nonatomic,retain) id accountInfo;
 @property (nonatomic,assign) IBOutlet UITextField* name;
@@ -29,9 +36,6 @@
 @property (nonatomic,assign) IBOutlet UITextField* password;
 
 @property (nonatomic,assign) IBOutlet UITextView* note;
-@property (nonatomic,assign) IBOutlet UISwitch* alarmEnable;
-@property (nonatomic,assign) IBOutlet UITextField* date;
-@property (nonatomic,assign) IBOutlet UITextField* time;
 @property (nonatomic,assign) IBOutlet UIButton* alarmButton;
 
 -(IBAction)setAlarm:(id)sender;
