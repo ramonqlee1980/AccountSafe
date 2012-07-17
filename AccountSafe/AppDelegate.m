@@ -27,26 +27,6 @@
 @synthesize viewController = _viewController;
 @synthesize naviController;
 
-#pragma mark transferXML
-//transfer xml to doc directory when installing
-//if file exist,just return
--(void)transferXMLWhenInstall
-{    
-    NSString* xmlFileName = [[self applicationDocumentsDirectory]stringByAppendingPathComponent:kAccountCategoryFileNameWithSuffix];
-    NSFileManager* fm = [NSFileManager defaultManager];
-    if([fm fileExistsAtPath:xmlFileName])
-    {
-#ifdef kDelete
-        NSError* error = nil;
-        [fm removeItemAtPath:xmlFileName error:&error];
-#endif
-        return;
-    }
-    
-    NSError* error = nil;
-    NSString* bundleXmlFileName = [[NSBundle mainBundle]pathForResource:kAccountCategoryFileName ofType:kAccountCategoryFileType];
-    [fm copyItemAtPath:bundleXmlFileName toPath:xmlFileName error:&error];
-}
 
 #pragma mark app LifeCycle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -57,15 +37,18 @@
 #endif
     [self transferXMLWhenInstall];
     
+    //in-app purchase
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[InAppRageIAPHelper sharedHelper]];
+    
+    //ui 
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.viewController = [[[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil] autorelease];
-   
+    self.viewController = [[[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil] autorelease];   
     self.naviController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
     [self.window addSubview:naviController.view];
         
     [self.window makeKeyAndVisible];
     
+    //notification 
     [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if(application.applicationIconBadgeNumber>0)
     {
@@ -104,12 +87,15 @@
     [persistentStoreCoordinator release];
     persistentStoreCoordinator = nil;
     
-    [_window release];
-    _window = nil;
+    [naviController popToViewController:_viewController animated:NO];
+    
     [_viewController release];
     _viewController = nil;
     [naviController release];
     naviController = nil;
+    
+    [_window release];
+    _window = nil;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -160,12 +146,14 @@
     [persistentStoreCoordinator release];
     persistentStoreCoordinator = nil;
     
-    [_window release];
-    _window = nil;
     [_viewController release];
     _viewController = nil;
     [naviController release];
     naviController = nil;
+    
+    [_window release];
+    _window = nil;
+    
     [super dealloc];
 }
 #pragma mark -
@@ -301,5 +289,26 @@
     BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
     NSLog(@"isPurchased:%d",r);
     return r;
+}
+
+#pragma mark transferXML
+//transfer xml to doc directory when installing
+//if file exist,just return
+-(void)transferXMLWhenInstall
+{    
+    NSString* xmlFileName = [[self applicationDocumentsDirectory]stringByAppendingPathComponent:kAccountCategoryFileNameWithSuffix];
+    NSFileManager* fm = [NSFileManager defaultManager];
+    if([fm fileExistsAtPath:xmlFileName])
+    {
+#ifdef kDelete
+        NSError* error = nil;
+        [fm removeItemAtPath:xmlFileName error:&error];
+#endif
+        return;
+    }
+    
+    NSError* error = nil;
+    NSString* bundleXmlFileName = [[NSBundle mainBundle]pathForResource:kAccountCategoryFileName ofType:kAccountCategoryFileType];
+    [fm copyItemAtPath:bundleXmlFileName toPath:xmlFileName error:&error];
 }
 @end
