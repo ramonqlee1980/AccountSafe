@@ -54,6 +54,11 @@
 		30E77112159EE78C00CB96AA /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E77111159EE78C00CB96AA /* icon-114.png */; };
 		C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */ = {isa = PBXBuildFile; fileRef = C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */; };
 		C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */; };
+		C195E88E15B56779002B17FA /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C195E88C15B56779002B17FA /* MoreViewController.m */; };
+		C195E88F15B56779002B17FA /* MoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C195E88D15B56779002B17FA /* MoreViewController.xib */; };
+		C195E89215B56865002B17FA /* third.png in Resources */ = {isa = PBXBuildFile; fileRef = C195E89015B56864002B17FA /* third.png */; };
+		C195E89315B56865002B17FA /* third@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C195E89115B56864002B17FA /* third@2x.png */; };
+		C195E89515B56E9D002B17FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C195E89415B56E9D002B17FA /* MessageUI.framework */; };
 		C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AD3D5215B3E58E0058630D /* TimePickerController.m */; };
 		C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1AD3D5315B3E58E0058630D /* TimePickerController.xib */; };
 /* End PBXBuildFile section */
@@ -128,6 +133,12 @@
 		C18A112115AD24A1005D3E8A /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		C191CDA515AE625E007FC95A /* EGOTextFieldAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOTextFieldAlertView.h; sourceTree = "<group>"; };
 		C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOTextFieldAlertView.m; sourceTree = "<group>"; };
+		C195E88B15B56779002B17FA /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		C195E88C15B56779002B17FA /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		C195E88D15B56779002B17FA /* MoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreViewController.xib; sourceTree = "<group>"; };
+		C195E89015B56864002B17FA /* third.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = third.png; sourceTree = "<group>"; };
+		C195E89115B56864002B17FA /* third@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "third@2x.png"; sourceTree = "<group>"; };
+		C195E89415B56E9D002B17FA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		C1AD3D3F15B3B9B00058630D /* AccountDetails_alarm_added.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_alarm_added.xcdatamodel; sourceTree = "<group>"; };
 		C1AD3D4115B3BC610058630D /* AccountDetails_attribute_rename.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AccountDetails_attribute_rename.xcdatamodel; sourceTree = "<group>"; };
 		C1AD3D5115B3E58E0058630D /* TimePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePickerController.h; sourceTree = "<group>"; };
@@ -140,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C195E89515B56E9D002B17FA /* MessageUI.framework in Frameworks */,
 				30ACB15615A18BF300BEE726 /* SystemConfiguration.framework in Frameworks */,
 				30ACB15415A18BB800BEE726 /* StoreKit.framework in Frameworks */,
 				308EE8C2159BCB6A00166A6D /* CoreData.framework in Frameworks */,
@@ -172,6 +184,7 @@
 		3083B8B91596AA8600E94875 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C195E89415B56E9D002B17FA /* MessageUI.framework */,
 				30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */,
 				30ACB15315A18BB800BEE726 /* StoreKit.framework */,
 				308EE8C1159BCB6A00166A6D /* CoreData.framework */,
@@ -198,6 +211,8 @@
 		3083B8C11596AA8600E94875 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C195E89015B56864002B17FA /* third.png */,
+				C195E89115B56864002B17FA /* third@2x.png */,
 				30AFCADC15AF81FA00EAB715 /* first.png */,
 				30AFCADD15AF81FA00EAB715 /* first@2x.png */,
 				30AFCADE15AF81FA00EAB715 /* second.png */,
@@ -236,6 +251,7 @@
 				3083B8CF1596AA8700E94875 /* CheckViewController_iPhone.xib */,
 				308918B91596CB4B000B5BE7 /* AccountSummaryView.xib */,
 				308918BB1596CC81000B5BE7 /* AccountDetailView.xib */,
+				C195E88D15B56779002B17FA /* MoreViewController.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -260,6 +276,8 @@
 		308D2BC21597C9A000B8AD88 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				C195E88B15B56779002B17FA /* MoreViewController.h */,
+				C195E88C15B56779002B17FA /* MoreViewController.m */,
 				C1AD3D5115B3E58E0058630D /* TimePickerController.h */,
 				C1AD3D5215B3E58E0058630D /* TimePickerController.m */,
 				3082D50D15974B50009D78FA /* AccountSummaryController.h */,
@@ -393,6 +411,9 @@
 				30AFCAE215AF81FA00EAB715 /* second.png in Resources */,
 				30AFCAE315AF81FA00EAB715 /* second@2x.png in Resources */,
 				C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */,
+				C195E88F15B56779002B17FA /* MoreViewController.xib in Resources */,
+				C195E89215B56865002B17FA /* third.png in Resources */,
+				C195E89315B56865002B17FA /* third@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +441,7 @@
 				308E338B15ACE8D200CCF777 /* GDataXMLNode.m in Sources */,
 				C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */,
 				C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */,
+				C195E88E15B56779002B17FA /* MoreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

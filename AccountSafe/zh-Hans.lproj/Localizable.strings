@@ -16,6 +16,19 @@ CFBundleDisplayName="帐号管家";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "帐号列表";
+"TabTitleMore"="...";
+
+//more
+"kMoreAboutKey"="关于 帐号管家";
+"kMoreFeedBackKey"="意见反馈";
+
+//email sent
+"EmailAlertViewTitle" = "电子邮件";
+"EmailAlertViewMsg" = "已成功送达收件人!";
+//about
+"AboutTitle"="About";
+"About"="Version V1.1.0 IDreems.com Presents";
+
 "Add"="添加类别";
 "Purchase"="购买";
 "Set"="设置密码";

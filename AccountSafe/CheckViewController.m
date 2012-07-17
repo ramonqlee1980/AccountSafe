@@ -9,10 +9,10 @@
 #import "CheckViewController.h"
 #import "AccountData.h"
 #import "VIPController.h"
+#import "AccountSummaryController.h"
+#import "MoreViewController.h"
 
 @implementation CheckViewController
-#import "AccountSummaryController.h"
-
 
 #pragma mark - Low Memory 
 - (void)didReceiveMemoryWarning
@@ -78,9 +78,13 @@
         UINavigationController* accountPageControllerNavi = [[UINavigationController alloc]initWithRootViewController:accountPageController];
         
         UIViewController* vipCtrl = [[VIPController alloc]initWithNibName:@"VIPController" bundle:nil];
-        UINavigationController* vipNavi = [[UINavigationController alloc]initWithRootViewController:vipCtrl];        
+        UINavigationController* vipNavi = [[UINavigationController alloc]initWithRootViewController:vipCtrl];  
+        
+        UIViewController* moreCtrl = [[MoreViewController alloc]initWithNibName:@"MoreViewController" bundle:nil];
+        UINavigationController* moreNavi = [[UINavigationController alloc]initWithRootViewController:moreCtrl];  
+        
         //add tabcontroller
-        NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageControllerNavi,vipNavi, nil];       
+        NSMutableArray* ctrls = [[NSMutableArray alloc]initWithObjects:accountPageControllerNavi,vipNavi,moreNavi, nil];       
         
         UITabBarController* tabCtrl = [[UITabBarController alloc]init];
         [tabCtrl setViewControllers:ctrls];
@@ -93,7 +97,9 @@
         [vipCtrl release];
         [accountPageController release];
         [ctrls release];
-        [tabCtrl release]; 
+        [tabCtrl release];
+        [moreCtrl release];
+        [moreNavi release];
     }
     else
     {

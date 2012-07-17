@@ -16,6 +16,22 @@ CFBundleDisplayName="AccountSafe";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
+"TabTitleMore"="...";
+
+
+//more
+"kMoreAboutKey"="About AccoutSafe";
+"kMoreFeedBackKey"="Feedback";
+
+//email share
+"EmailAlertViewTitle" = "Email";
+"EmailAlertViewMsg" = "Email sent successfully!";
+
+//about
+"AboutTitle"="About";
+"About"="Version V1.1.0 IDreems.com Presents";
+
+
 
 //
 "Add"="NewCategory";

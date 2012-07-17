@@ -16,6 +16,22 @@ CFBundleDisplayName="帳號管家";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
+"TabTitleMore"="...";
+
+//more
+"kMoreAboutKey"="About AccoutSafe";
+"kMoreFeedBackKey"="Feedback";
+
+
+//email sent
+"EmailAlertViewTitle" = "Email";
+"EmailAlertViewMsg" = "Email sent successfully!";
+
+//about
+"AboutTitle"="About";
+"About"="Version V1.1.0 IDreems.com Presents";
+
+
 "Add"="NewCategory";
 "Purchase"="購買";
 "Set"="設置密碼";
