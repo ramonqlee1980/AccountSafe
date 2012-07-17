@@ -15,11 +15,15 @@
 #import "TimePickerController.h"
 
 @interface AccountDetailController()
-
+{
+    NSDate* alarmTime;
+}
+@property (nonatomic,retain) NSDate* alarmTime;
 -(NSString*)validValues;
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
 -(void)accountInfoChanged;
 -(void)addAccountinfoChangedNotification;
+-(void)alarmSet:(NSNotification*)info;
 
 @end
 
@@ -37,8 +41,9 @@
 @synthesize alarmEnable;
 @synthesize date;
 @synthesize time;
-@synthesize accountInfo;
+@synthesize accountInfo=_accountInfo;
 @synthesize alarmButton;
+@synthesize alarmTime;
 
 - (id)initWithAccountInfo:(NSInteger)accountType accountInfo:(id)data nibNameOrNil:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -57,6 +62,7 @@
 -(void)dealloc
 {
     self.accountInfo = nil;
+    self.alarmTime = nil;
     [super dealloc];
 }
 - (void)didReceiveMemoryWarning
@@ -69,12 +75,6 @@
 
 #pragma mark - View lifecycle
 
-/*
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- - (void)loadView
- {
- }
- */
 // called when 'return' key pressed. return NO to ignore.
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -110,6 +110,9 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(accountInfoChanged) name:UITextFieldTextDidChangeNotification object:password];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(accountInfoChanged) name:UITextViewTextDidChangeNotification object:note];
+    
+    //data exchange from timepicker
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(alarmSet:) name:kAlarmTimeNotification object:nil];
 }
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -170,7 +173,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -219,8 +222,7 @@
         info.password = password.text;
         info.tag = note.text; 
         info.type = [NSNumber numberWithInt:_accountType];
-        //TODO::alarm for this account modification
-        info.alarm = [NSDate date];
+        info.alarm = alarmTime;
         
         ProtocolLogManager* mgr = [ProtocolLogManager sharedProtocolLogManager];
         if (update) {
@@ -279,10 +281,32 @@
     UIBarButtonItem *backItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", "") style:UIBarButtonItemStyleBordered target:nil action:nil];
     self.navigationItem.backBarButtonItem = backItem;   
     [backItem release];
-
     
     UIViewController *ctrl = [[TimePickerController alloc]initWithNibName:@"TimePickerController" bundle:nil];
+    NSDate* alarmTimeInit = nil;
+    if (_accountInfo) {
+        alarmTimeInit = ((AccountInfo*)_accountInfo).alarm;
+    }
+    if (!alarmTimeInit) {
+        alarmTimeInit = [NSDate date];
+    }
+    [ctrl setValue:alarmTimeInit forKey:kAlarmTime];
     [self.navigationController pushViewController:ctrl animated:YES];
     [ctrl release];
+}
+
+#pragma mark alarmSet
+-(void)alarmSet:(NSNotification*)info
+{    
+    if(info)
+    {
+        NSDictionary* dict = info.userInfo;
+        id alarm = [dict valueForKey:kAlarmTime];
+        if ( [alarm isKindOfClass:[NSDate class]] ) {
+            self.alarmTime = (NSDate*)alarm;
+                       
+            [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:NSLocalizedString(@"Save",@"") action:(@selector(rightItemClickSave:))];
+        }
+    }
 }
 @end

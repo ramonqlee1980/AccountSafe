@@ -13,8 +13,9 @@
     UITableView* tableView;
     UIDatePicker* datePicker;
     UIDatePicker* timePicker;
+    NSDate* alarmTimeSet;
 }
-
+@property (nonatomic,retain) NSDate* alarmTimeSet;
 @property (nonatomic,retain) IBOutlet  UITableView* tableView;
 @property (nonatomic,retain) IBOutlet UIDatePicker* datePicker;
 @property (nonatomic,retain) IBOutlet UIDatePicker* timePicker;

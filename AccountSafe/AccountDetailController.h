@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define kAlarmTimeNotification @"alarmtime"
+#define kAlarmTime @"alarmTimeSet" 
+
 @interface AccountDetailController : UIViewController<UITextFieldDelegate,UITextViewDelegate,UIAlertViewDelegate>
 {
     id _accountInfo;
