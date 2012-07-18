@@ -18,9 +18,18 @@ CFBundleDisplayName="帐号管家";
 "TabTitleSummary" = "帐号列表";
 "TabTitleMore"="...";
 
+//passcode changing tips
+"kChangePasscodeTipCommonErrorKey"="密码不能为空";
+"kChangePasscodeTipIncorrectOriginalKey"="原密码输入有误";
+"kChangePasscodeTipSuccessfulKey"="密码修改成功";
+
+"OriginalPasscodeKey"="原密码";
+"NewPasscodeKey"  = "新密码（建议字母数字组合）";
+
 //more
 "kMoreAboutKey"="关于 帐号管家";
 "kMoreFeedBackKey"="意见反馈";
+"kMoreChangePasscodeKey"="修改密码";
 
 //email sent
 "EmailAlertViewTitle" = "电子邮件";

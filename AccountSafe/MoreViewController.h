@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface MoreViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate>
+@interface MoreViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,MFMailComposeViewControllerDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,retain) IBOutlet UITableView* tableView;
 

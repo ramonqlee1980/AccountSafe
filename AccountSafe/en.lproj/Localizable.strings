@@ -19,9 +19,18 @@ CFBundleDisplayName="AccountSafe";
 "TabTitleMore"="...";
 
 
+"OriginalPasscodeKey"="Original Passcode";
+"NewPasscodeKey"  = "New Passcode";
+
+//passcode changing tips
+"kChangePasscodeTipCommonErrorKey"="Empty passcode is not allowed";
+"kChangePasscodeTipIncorrectOriginalKey"="Original passcode is not correct";
+"kChangePasscodeTipSuccessfulKey"="New passcode set successfully";
+
 //more
 "kMoreAboutKey"="About AccoutSafe";
 "kMoreFeedBackKey"="Feedback";
+"kMoreChangePasscodeKey"="Change Passcode";
 
 //email share
 "EmailAlertViewTitle" = "Email";

@@ -18,10 +18,18 @@ CFBundleDisplayName="帳號管家";
 "TabTitleSummary" = "Accounts";
 "TabTitleMore"="...";
 
+//passcode changing tips
+"kChangePasscodeTipCommonErrorKey"="Empty passcode is not allowed";
+"kChangePasscodeTipIncorrectOriginalKey"="Original passcode is not correct";
+"kChangePasscodeTipSuccessfulKey"="New passcode set successfully";
+
+"OriginalPasscodeKey"="Original Passcode";
+"NewPasscodeKey"  = "New Passcode";
+
 //more
 "kMoreAboutKey"="About AccoutSafe";
 "kMoreFeedBackKey"="Feedback";
-
+"kMoreChangePasscodeKey"="Change Passcode";
 
 //email sent
 "EmailAlertViewTitle" = "Email";

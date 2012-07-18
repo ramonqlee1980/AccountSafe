@@ -8,6 +8,7 @@
 
 #import "MoreViewController.h"
 #import "AppDelegate.h"
+#import "AccountData.h"
 
 @interface MoreViewController ()
 
@@ -16,12 +17,28 @@
 @implementation MoreViewController
 @synthesize tableView;
 
-#define kMoreFeatureCount 2
+//tag for identifying views when changing passcode
+#define kOriginalPasscodeViewTag 0x100
+#define kNewPasscodeViewTag      0x101
+
+//passcode changing tips
+#define kChangePasscodeTipCommonErrorKey @"kChangePasscodeTipCommonErrorKey"
+#define kChangePasscodeTipIncorrectOriginalKey @"kChangePasscodeTipIncorrectOriginalKey"
+#define kChangePasscodeTipSuccessfulKey @"kChangePasscodeTipSuccessfulKey"
+
+#define kOriginalPasscodePlaceholerKey @"OriginalPasscodeKey"
+#define kNewPasscodePlaceholerKey @"NewPasscodeKey"   
+
+
+#define kMoreFeatureCount 3
+
 #define kMoreAbout 0
 #define kMoreFeedBack 1
+#define kMoreChangePasscode 2
 
 #define kMoreAboutKey @"kMoreAboutKey"
 #define kMoreFeedBackKey @"kMoreFeedBackKey"
+#define kMoreChangePasscodeKey @"kMoreChangePasscodeKey" 
 
 #pragma  mark tableview datasource 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -56,7 +73,10 @@
             break;
         case kMoreFeedBack:
             key = kMoreFeedBackKey;
-            break;        
+            break; 
+        case kMoreChangePasscode:
+            key = kMoreChangePasscodeKey;
+            break;
         default:
             break;
     }
@@ -75,6 +95,100 @@
     [alert release];
 }
 
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+#define kOK 1
+    if (buttonIndex == kOK) {
+        UITextField* originalPasscode = nil;
+        UITextField* newPasscode = nil;
+        //find textfield
+        NSArray* subviews = [alertView subviews];
+        for (id view in subviews) {
+            if([view isKindOfClass:[UITextField class]])
+            {  
+                switch (((UIView*)view).tag) {
+                    case kOriginalPasscodeViewTag:
+                        originalPasscode = (UITextField*)view;
+                        break;
+                    case kNewPasscodeViewTag:
+                        newPasscode = (UITextField*)view;
+                    default:
+                        break;
+                }
+            }
+        }       
+       
+        //check for correctness        
+        //null content
+        if (nil==originalPasscode || nil == originalPasscode.text || 0 == originalPasscode.text.length ||
+            nil==newPasscode || nil == newPasscode.text || 0 == newPasscode.text.length) {
+            [self showAlertViewWithTitle:@"" message:NSLocalizedString(kChangePasscodeTipCommonErrorKey,"")];
+            return;
+        }
+        
+        //original passcode incorrect
+        if(![[AccountData getOpenDoorKey] isEqualToString:originalPasscode.text])
+        {
+            //TODO::pop tip
+            [self showAlertViewWithTitle:@"" message:NSLocalizedString(kChangePasscodeTipIncorrectOriginalKey,"")];
+            return;
+        }        
+        
+        [AccountData setOpenDoorKey:newPasscode.text];
+        //pop successful tip
+        [self showAlertViewWithTitle:@"" message:NSLocalizedString(kChangePasscodeTipSuccessfulKey,"")];
+    }
+}
+
+-(void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message
+{
+    UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:NSLocalizedString(@"OK","") otherButtonTitles:nil]autorelease];                              
+    [alert show];
+}
+
+-(void)changePasscode
+{
+    //layout params
+#define kTextFieldHeight 25.0
+#define kTextFieldWidth  260.0
+#define kFirstTextFieldOriginX 12.0
+#define kFirstTextFieldOriginY 45.0
+#define kTextFieldSpacingY 12.0
+   
+    
+    //alert view for changing passcode
+    UIAlertView* alertView = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(kMoreChangePasscodeKey, "") message:@"\n\n\n" delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", "") otherButtonTitles:NSLocalizedString(@"OK", ""), nil]autorelease];
+    
+    // Adds a username Field
+    UITextField* utextfield = [[UITextField alloc] initWithFrame:CGRectMake(kFirstTextFieldOriginX, kFirstTextFieldOriginY, kTextFieldWidth, kTextFieldHeight)]; 
+    utextfield.placeholder = NSLocalizedString(kOriginalPasscodePlaceholerKey, "");
+    [utextfield setBackgroundColor:[UIColor whiteColor]];
+    utextfield.enablesReturnKeyAutomatically = YES;
+    [utextfield setReturnKeyType:UIReturnKeyDone];    
+    utextfield.secureTextEntry = YES;
+    utextfield.tag = kOriginalPasscodeViewTag;
+    [utextfield performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05]; 
+    
+    UITextField* newPasscodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(kFirstTextFieldOriginX, kFirstTextFieldOriginY+kTextFieldHeight+kTextFieldSpacingY, kTextFieldWidth, kTextFieldHeight)]; 
+    newPasscodeTextField.placeholder = NSLocalizedString(kNewPasscodePlaceholerKey, "");
+    [newPasscodeTextField setBackgroundColor:[UIColor whiteColor]];
+    newPasscodeTextField.enablesReturnKeyAutomatically = YES;
+    [newPasscodeTextField setReturnKeyType:UIReturnKeyDone];
+    newPasscodeTextField.secureTextEntry = YES;
+    newPasscodeTextField.tag = kNewPasscodeViewTag;
+    
+    [alertView addSubview:utextfield];
+    [alertView addSubview:newPasscodeTextField];
+    
+    [utextfield release];
+    [newPasscodeTextField release];
+    
+    // Show alert on screen.
+    [alertView show];
+}
+
+
 #pragma mark tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -84,7 +198,10 @@
             break;
         case kMoreFeedBack:
             [self feedback:nil];
-            break;        
+            break;   
+        case kMoreChangePasscode:
+            [self changePasscode];
+            break;
         default:
             break;
     }
