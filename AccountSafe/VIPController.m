@@ -21,6 +21,8 @@
 @synthesize hud = _hud;
 @synthesize tableView;
 
+#define kMaxNumberOfLines 3//numberofline for tableview cell's label
+
 #define kVIPFeatureCount 4
 #define kVIPNewCategory 0
 #define kVIPDeleteCategory 1
@@ -79,6 +81,7 @@
     
     if (key) {
         cell.textLabel.text = NSLocalizedString(key, "");
+        cell.textLabel.numberOfLines = kMaxNumberOfLines;
     }    
     
     return cell;
