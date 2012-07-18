@@ -30,6 +30,7 @@ CFBundleDisplayName="帐号管家";
 "kMoreAboutKey"="关于 帐号管家";
 "kMoreFeedBackKey"="意见反馈";
 "kMoreChangePasscodeKey"="修改密码";
+"kMoreLocalAlertKey"="添加提醒:%d";
 
 //email sent
 "EmailAlertViewTitle" = "电子邮件";

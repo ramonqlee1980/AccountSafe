@@ -31,6 +31,7 @@ CFBundleDisplayName="AccountSafe";
 "kMoreAboutKey"="About AccoutSafe";
 "kMoreFeedBackKey"="Feedback";
 "kMoreChangePasscodeKey"="Change Passcode";
+"kMoreLocalAlertKey"="Local alerts:%d";
 
 //email share
 "EmailAlertViewTitle" = "Email";

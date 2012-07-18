@@ -9,6 +9,7 @@
 #import "MoreViewController.h"
 #import "AppDelegate.h"
 #import "AccountData.h"
+#import "UILocalNotification.h"
 
 @interface MoreViewController ()
 
@@ -30,15 +31,17 @@
 #define kNewPasscodePlaceholerKey @"NewPasscodeKey"   
 
 
-#define kMoreFeatureCount 3
+#define kMoreFeatureCount 4
 
 #define kMoreAbout 0
 #define kMoreFeedBack 1
 #define kMoreChangePasscode 2
+#define kMoreLocalAlert 3
 
 #define kMoreAboutKey @"kMoreAboutKey"
 #define kMoreFeedBackKey @"kMoreFeedBackKey"
 #define kMoreChangePasscodeKey @"kMoreChangePasscodeKey" 
+#define kMoreLocalAlertKey @"kMoreLocalAlertKey"
 
 #pragma  mark tableview datasource 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -66,27 +69,52 @@
     //1.2delete category
     NSString* key = nil;
     
+#define CASE_BRANCH(s) case s:\
+key=s##Key;\
+break;
+    
     //2.alarm to change passcode    
     switch (indexPath.section) {
-        case kMoreAbout:
-            key = kMoreAboutKey;
-            break;
-        case kMoreFeedBack:
-            key = kMoreFeedBackKey;
-            break; 
-        case kMoreChangePasscode:
-            key = kMoreChangePasscodeKey;
-            break;
+        CASE_BRANCH(kMoreAbout)
+        CASE_BRANCH(kMoreFeedBack)
+        CASE_BRANCH(kMoreChangePasscode)            
+        CASE_BRANCH(kMoreLocalAlert)
         default:
             break;
     }
     
     if (key) {
-        cell.textLabel.text = NSLocalizedString(key, "");
+        NSString* t = NSLocalizedString(key, "");
+        //special case
+        if (indexPath.section == kMoreLocalAlert) {
+            t = [NSString stringWithFormat:t,[UILocalNotification getBadgeNumber]];
+        }
+        cell.textLabel.text = t;
     }    
     
     return cell;
 }
+#pragma mark tableview delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case kMoreAbout:
+            [self modalViewAction:nil];
+            break;
+        case kMoreFeedBack:
+            [self feedback:nil];
+            break;   
+        case kMoreChangePasscode:
+            [self changePasscode];
+            break;
+        case kMoreLocalAlert:
+            break;            
+        default:
+            break;
+    }
+    
+}
+
 #pragma mark about
 - (IBAction)modalViewAction:(id)sender
 {
@@ -188,25 +216,6 @@
     [alertView show];
 }
 
-
-#pragma mark tableview delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    switch (indexPath.section) {
-        case kMoreAbout:
-            [self modalViewAction:nil];
-            break;
-        case kMoreFeedBack:
-            [self feedback:nil];
-            break;   
-        case kMoreChangePasscode:
-            [self changePasscode];
-            break;
-        default:
-            break;
-    }
-    
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

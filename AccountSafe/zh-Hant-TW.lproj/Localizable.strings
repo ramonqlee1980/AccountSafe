@@ -30,6 +30,7 @@ CFBundleDisplayName="帳號管家";
 "kMoreAboutKey"="About AccoutSafe";
 "kMoreFeedBackKey"="Feedback";
 "kMoreChangePasscodeKey"="Change Passcode";
+"kMoreLocalAlertKey"="Local alerts:%d";
 
 //email sent
 "EmailAlertViewTitle" = "Email";

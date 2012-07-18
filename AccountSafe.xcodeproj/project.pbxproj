@@ -61,6 +61,8 @@
 		C195E89515B56E9D002B17FA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C195E89415B56E9D002B17FA /* MessageUI.framework */; };
 		C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1AD3D5215B3E58E0058630D /* TimePickerController.m */; };
 		C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1AD3D5315B3E58E0058630D /* TimePickerController.xib */; };
+		C1BB26F015B6530C007037CC /* README in Resources */ = {isa = PBXBuildFile; fileRef = C1BB26EE15B6530C007037CC /* README */; };
+		C1BB26F215B65318007037CC /* UILocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BB26F115B65318007037CC /* UILocalNotification.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +146,9 @@
 		C1AD3D5115B3E58E0058630D /* TimePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePickerController.h; sourceTree = "<group>"; };
 		C1AD3D5215B3E58E0058630D /* TimePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePickerController.m; sourceTree = "<group>"; };
 		C1AD3D5315B3E58E0058630D /* TimePickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimePickerController.xib; sourceTree = "<group>"; };
+		C1BB26EE15B6530C007037CC /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		C1BB26EF15B6530C007037CC /* UILocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILocalNotification.h; sourceTree = "<group>"; };
+		C1BB26F115B65318007037CC /* UILocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILocalNotification.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +264,7 @@
 		308D2BC01597C99600B8AD88 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1BB26ED15B652EA007037CC /* UILocalNotification */,
 				308E338D15ACE8D600CCF777 /* GDataXML */,
 				30ACB14E15A18A7300BEE726 /* Util */,
 				30ACB14015A18A4500BEE726 /* InAppPurchase */,
@@ -330,6 +336,16 @@
 				C191CDA615AE625E007FC95A /* EGOTextFieldAlertView.m */,
 			);
 			name = Auxillary;
+			sourceTree = "<group>";
+		};
+		C1BB26ED15B652EA007037CC /* UILocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				C1BB26F115B65318007037CC /* UILocalNotification.m */,
+				C1BB26EE15B6530C007037CC /* README */,
+				C1BB26EF15B6530C007037CC /* UILocalNotification.h */,
+			);
+			name = UILocalNotification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -414,6 +430,7 @@
 				C195E88F15B56779002B17FA /* MoreViewController.xib in Resources */,
 				C195E89215B56865002B17FA /* third.png in Resources */,
 				C195E89315B56865002B17FA /* third@2x.png in Resources */,
+				C1BB26F015B6530C007037CC /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +459,7 @@
 				C191CDA715AE625E007FC95A /* EGOTextFieldAlertView.m in Sources */,
 				C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */,
 				C195E88E15B56779002B17FA /* MoreViewController.m in Sources */,
+				C1BB26F215B65318007037CC /* UILocalNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
