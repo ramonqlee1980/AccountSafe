@@ -7,12 +7,12 @@
 */
 CFBundleDisplayName="AccountSafe";
 
-"Account"="Account: ";
-"Name"="Name: ";
-"Password"="Password: ";
-"Note"="Tag: ";
-"alarmLabel"="Alarm:";
-"alarmButton"="Set Date and Time";
+"Account"="Account:";
+"Name"="Name:";
+"Password"="Password:";
+"Note"="Tag:";
+"alarmLabel"="Alert:";
+"alarmButton"="Set Date & Time";
 
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
@@ -25,7 +25,7 @@ CFBundleDisplayName="AccountSafe";
 
 //email share
 "EmailAlertViewTitle" = "Email";
-"EmailAlertViewMsg" = "Email sent successfully!";
+"EmailAlertViewMsg" = "Email Sent Successfully!";
 
 //about
 "AboutTitle"="About";
@@ -34,34 +34,34 @@ CFBundleDisplayName="AccountSafe";
 
 
 //
-"Add"="NewCategory";
+"Add"="Add Category";
 "Purchase"="Purchase";
 "Set"="Set";
 "Enter"="Enter";
 "Back"="Back";
-"invalid_data_title"="Invalid data";
+"invalid_data_title"="Invalid Data";
 "OK"="OK";
 "Cancel"="Cancel";
 "Delete"="Delete";
 "Save"="Save";
-"NewAccountCategory"="Add account category";
+"NewAccountCategory"="Add Account Category";
 "time2ModifyPasscode" = "It's time to change your %@ passcode!";
 
 //vip feature
 "kVIPFeatureListTitle"="VIP Features";
-"kVIPNewCategoryKey"="Add new category";
-"kVIPDeleteCategoryKey"="Delete category";
-"kVIPSetAlarmKey"="Set alarm to change passcode";
-"kVIPMoreFeaturesKey" = "More features coming soon";
+"kVIPNewCategoryKey"="Add New Category";
+"kVIPDeleteCategoryKey"="Delete Category";
+"kVIPSetAlarmKey"="Set Alert to Remind of Changing Passcode";
+"kVIPMoreFeaturesKey" = "More Features Coming Soon";
 
-"vipFeatures"="Features for VIP users only";
+"vipFeatures"="Features for VIP Users Only";
 
 "try2delete" = "Warning:Are you sure to delete permanently?";
 "duplicatedAccountCategory" = "Duplicate Account Category";
 
-"enterPasswordPlaceholder"="Enter passcode";
-"requiredPlaceholder" = "required";
-"optional"="optional";
+"enterPasswordPlaceholder"="Enter Passcode";
+"requiredPlaceholder" = "Required";
+"optional"="Optional";
 
 "NullName"="Name can't be blank!";
 "NullAccount"="Account can't be blank!";
