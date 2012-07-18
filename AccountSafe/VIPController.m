@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface VIPController()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
@@ -48,13 +49,12 @@
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 #define kVIPCell @"VIPCell"
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:kVIPCell];
     if (nil==cell) {
-        cell = [[[UITableViewCell alloc]init]autorelease];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kVIPCell]autorelease];
     }
     
     //1 category edit
@@ -79,13 +79,35 @@
             break;
     }
     
-    if (key) {
+    [cell setBackgroundColor:[UIColor clearColor]];
+    UIView* b = [[UIView alloc]init];
+    [cell setBackgroundView:b];
+    [b release];
+    
+    if (key) {       
+        
         cell.textLabel.text = NSLocalizedString(key, "");
         cell.textLabel.numberOfLines = kMaxNumberOfLines;
+        cell.textLabel.textColor = [UIColor blueColor];
+        [cell.textLabel setBackgroundColor:[UIColor whiteColor]];
+        //if (indexPath.section%2==0) {
+        //    cell.textLabel.textAlignment = UITextAlignmentRight;
+        //}
+        
+        cell.textLabel.layer.borderColor = [UIColor grayColor].CGColor;
+        cell.textLabel.layer.borderWidth = 1.0;
+        cell.textLabel.layer.cornerRadius = 5.0; 
+        
+        //sizeToContent    
+        //CGSize txtSz = [cell.textLabel.text sizeWithFont:[UIFont fontWithName: @"Helvetica" size: 16]];        
+        //CGRect lblFrame = CGRectMake(0,0, txtSz.width, txtSz.height);        
+        //cell.textLabel.frame = lblFrame;
     }    
     
     return cell;
 }
+
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString* r = nil;
