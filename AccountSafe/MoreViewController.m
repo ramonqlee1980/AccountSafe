@@ -196,7 +196,9 @@ break;
     [utextfield setReturnKeyType:UIReturnKeyDone];    
     utextfield.secureTextEntry = YES;
     utextfield.tag = kOriginalPasscodeViewTag;
+    utextfield.borderStyle = UITextBorderStyleRoundedRect;
     [utextfield performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05]; 
+    
     
     UITextField* newPasscodeTextField = [[UITextField alloc] initWithFrame:CGRectMake(kFirstTextFieldOriginX, kFirstTextFieldOriginY+kTextFieldHeight+kTextFieldSpacingY, kTextFieldWidth, kTextFieldHeight)]; 
     newPasscodeTextField.placeholder = NSLocalizedString(kNewPasscodePlaceholerKey, "");
@@ -205,6 +207,7 @@ break;
     [newPasscodeTextField setReturnKeyType:UIReturnKeyDone];
     newPasscodeTextField.secureTextEntry = YES;
     newPasscodeTextField.tag = kNewPasscodeViewTag;
+    newPasscodeTextField.borderStyle = UITextBorderStyleRoundedRect;
     
     [alertView addSubview:utextfield];
     [alertView addSubview:newPasscodeTextField];

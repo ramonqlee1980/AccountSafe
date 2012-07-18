@@ -253,7 +253,8 @@
     utextfield.placeholder = NSLocalizedString(@"Name", "");
     [utextfield setBackgroundColor:[UIColor whiteColor]];
     utextfield.enablesReturnKeyAutomatically = YES;
-    [utextfield setReturnKeyType:UIReturnKeyDone];    
+    [utextfield setReturnKeyType:UIReturnKeyDone];   
+    utextfield.borderStyle = UITextBorderStyleRoundedRect;
     [utextfield performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];    
     [alertView addSubview:utextfield];
     [utextfield release];
