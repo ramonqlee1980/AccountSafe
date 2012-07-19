@@ -128,8 +128,7 @@
     
     return cell;
 }
-
-
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString* r = nil;
@@ -138,7 +137,7 @@
     }
     
     return r;
-}
+}*/
 
 #pragma mark tableview delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -180,7 +179,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = NSLocalizedString(@"CFBundleDisplayName", @"");
+    
     tableView.delegate = self;
     tableView.dataSource = self;   
     
@@ -194,6 +193,7 @@
         tableView.separatorColor = [UIColor orangeColor];
         self.navigationItem.rightBarButtonItem = nil;
     }
+    self.navigationItem.title = NSLocalizedString(kVIPFeatureListTitle, "");
 }
 
 - (void)viewDidUnload

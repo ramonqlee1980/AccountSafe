@@ -276,8 +276,7 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {      
-    //self.navigationItem.hidesBackButton = YES;
-    [self setRightClick:@"" buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
+    [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
     _accountData = [AccountData shareInstance];
     
     self.tabBarController.hidesBottomBarWhenPushed = YES;
