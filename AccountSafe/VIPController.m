@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface VIPController()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
@@ -48,13 +49,21 @@
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 #define kVIPCell @"VIPCell"
+#define kTextLaybleFlag 0x100
+    UILabel* msgLabel = nil;
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:kVIPCell];
     if (nil==cell) {
-        cell = [[[UITableViewCell alloc]init]autorelease];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kVIPCell]autorelease];
+        msgLabel = [[[UILabel alloc] init] autorelease];
+        msgLabel.tag = kTextLaybleFlag;
+        [cell.contentView addSubview: msgLabel];
+    }
+    else
+    {
+        msgLabel = (UILabel*)[cell.contentView viewWithTag: kTextLaybleFlag];
     }
     
     //1 category edit
@@ -79,13 +88,48 @@
             break;
     }
     
-    if (key) {
-        cell.textLabel.text = NSLocalizedString(key, "");
-        cell.textLabel.numberOfLines = kMaxNumberOfLines;
+    [cell setBackgroundColor:[UIColor clearColor]];
+    UIView* b = [[UIView alloc]init];
+    [cell setBackgroundView:b];
+    [b release];
+    
+    if (key) {       
+        
+        msgLabel.text = NSLocalizedString(key, "");
+        msgLabel.numberOfLines = kMaxNumberOfLines;
+        msgLabel.textColor = [UIColor blueColor];
+        msgLabel.textAlignment = UITextAlignmentCenter;
+        
+        msgLabel.layer.borderColor = [UIColor grayColor].CGColor;
+        msgLabel.layer.borderWidth = 1.0;
+        msgLabel.layer.cornerRadius = 5.0; 
+        
+        //sizeToContent    
+        CGSize txtSz = [msgLabel.text sizeWithFont:[UIFont fontWithName: @"Helvetica" size: 16]];        
+        CGRect lblFrame = CGRectMake(0,0, txtSz.width, txtSz.height);
+        //expand bounding box
+#define kPaddingLR 10
+#define kPaddingTB 10
+        lblFrame.size.width += 2*kPaddingLR;
+        lblFrame.size.height += 2*kPaddingTB;
+        
+#define kPaddingScreen 20
+        UIColor* bgrColor = [UIColor whiteColor];
+        //for even ones,align them on the right of the screen
+        if (indexPath.section%2==0) {
+            CGRect r = [[UIScreen mainScreen]applicationFrame];
+            lblFrame.origin.x = r.size.width - lblFrame.size.width -kPaddingScreen;
+            bgrColor = [UIColor yellowColor];
+        }
+        
+        msgLabel.frame = lblFrame;
+        [msgLabel setBackgroundColor:bgrColor];
     }    
     
     return cell;
 }
+
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString* r = nil;

@@ -22,6 +22,9 @@
 #define kDetailFontSize 12
 #define kTopMargin 5
 
+@interface AccountSummaryController()
+-(void)persistentCategoryData;
+@end
 
 @implementation AccountSummaryController
 @synthesize tableView=_tableView;

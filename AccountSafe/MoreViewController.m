@@ -12,7 +12,9 @@
 #import "UILocalNotification.h"
 
 @interface MoreViewController ()
-
+- (IBAction)modalViewAction:(id)sender;
+-(void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message;
+-(void)changePasscode;
 @end
 
 @implementation MoreViewController

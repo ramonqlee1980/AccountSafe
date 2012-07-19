@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30781D6D15B76D570038BFD1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30781D6C15B76D570038BFD1 /* QuartzCore.framework */; };
 		3082D50F15974B50009D78FA /* AccountSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3082D50E15974B50009D78FA /* AccountSummaryController.m */; };
 		3083B8BB1596AA8600E94875 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3083B8BA1596AA8600E94875 /* UIKit.framework */; };
 		3083B8BD1596AA8600E94875 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3083B8BC1596AA8600E94875 /* Foundation.framework */; };
@@ -66,6 +67,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30781D6C15B76D570038BFD1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3082D50D15974B50009D78FA /* AccountSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountSummaryController.h; sourceTree = "<group>"; };
 		3082D50E15974B50009D78FA /* AccountSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountSummaryController.m; sourceTree = "<group>"; };
 		3083B8B61596AA8600E94875 /* AccountSafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccountSafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30781D6D15B76D570038BFD1 /* QuartzCore.framework in Frameworks */,
 				C195E89515B56E9D002B17FA /* MessageUI.framework in Frameworks */,
 				30ACB15615A18BF300BEE726 /* SystemConfiguration.framework in Frameworks */,
 				30ACB15415A18BB800BEE726 /* StoreKit.framework in Frameworks */,
@@ -189,6 +192,7 @@
 		3083B8B91596AA8600E94875 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				30781D6C15B76D570038BFD1 /* QuartzCore.framework */,
 				C195E89415B56E9D002B17FA /* MessageUI.framework */,
 				30ACB15515A18BF300BEE726 /* SystemConfiguration.framework */,
 				30ACB15315A18BB800BEE726 /* StoreKit.framework */,
