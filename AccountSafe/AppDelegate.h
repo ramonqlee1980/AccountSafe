@@ -41,7 +41,7 @@
 @property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
 @property (strong, nonatomic) UIWindow *window;
 
-@property (strong, nonatomic) CheckViewController *viewController;
+@property (strong, nonatomic) UIViewController *viewController;
 @property (strong, nonatomic) UINavigationController *naviController;
 
 +(void)scheduleLocalNotification:(AccountInfo*)info;

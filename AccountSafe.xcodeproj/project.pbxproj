@@ -51,6 +51,12 @@
 		30AFCAE115AF81FA00EAB715 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30AFCADD15AF81FA00EAB715 /* first@2x.png */; };
 		30AFCAE215AF81FA00EAB715 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 30AFCADE15AF81FA00EAB715 /* second.png */; };
 		30AFCAE315AF81FA00EAB715 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 30AFCADF15AF81FA00EAB715 /* second@2x.png */; };
+		30B02FE215B9947B00D98FA2 /* dot_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B02FDC15B9947B00D98FA2 /* dot_off.png */; };
+		30B02FE315B9947B00D98FA2 /* dot_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 30B02FDD15B9947B00D98FA2 /* dot_on.png */; };
+		30B02FE415B9947B00D98FA2 /* DrawPatternLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B02FDF15B9947B00D98FA2 /* DrawPatternLockView.m */; };
+		30B02FE515B9947B00D98FA2 /* DrawPatternLockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B02FE115B9947B00D98FA2 /* DrawPatternLockViewController.m */; };
+		30B02FE815B994D100D98FA2 /* PatternLockAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30B02FE715B994D100D98FA2 /* PatternLockAppViewController.m */; };
+		30B02FEA15B99C9700D98FA2 /* PatternLockAppViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30B02FE915B99C9700D98FA2 /* PatternLockAppViewController.xib */; };
 		30E77110159EE77C00CB96AA /* icon-57.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E7710F159EE77C00CB96AA /* icon-57.png */; };
 		30E77112159EE78C00CB96AA /* icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 30E77111159EE78C00CB96AA /* icon-114.png */; };
 		C18A0E1D15AD1110005D3E8A /* AccountCategory.xml in Resources */ = {isa = PBXBuildFile; fileRef = C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */; };
@@ -131,6 +137,15 @@
 		30AFCADD15AF81FA00EAB715 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		30AFCADE15AF81FA00EAB715 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		30AFCADF15AF81FA00EAB715 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		30B02FDC15B9947B00D98FA2 /* dot_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_off.png; sourceTree = "<group>"; };
+		30B02FDD15B9947B00D98FA2 /* dot_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot_on.png; sourceTree = "<group>"; };
+		30B02FDE15B9947B00D98FA2 /* DrawPatternLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockView.h; sourceTree = "<group>"; };
+		30B02FDF15B9947B00D98FA2 /* DrawPatternLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternLockView.m; sourceTree = "<group>"; };
+		30B02FE015B9947B00D98FA2 /* DrawPatternLockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawPatternLockViewController.h; sourceTree = "<group>"; };
+		30B02FE115B9947B00D98FA2 /* DrawPatternLockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawPatternLockViewController.m; sourceTree = "<group>"; };
+		30B02FE615B994D100D98FA2 /* PatternLockAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PatternLockAppViewController.h; sourceTree = "<group>"; };
+		30B02FE715B994D100D98FA2 /* PatternLockAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PatternLockAppViewController.m; sourceTree = "<group>"; };
+		30B02FE915B99C9700D98FA2 /* PatternLockAppViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatternLockAppViewController.xib; sourceTree = "<group>"; };
 		30E7710F159EE77C00CB96AA /* icon-57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-57.png"; path = "../icon-57.png"; sourceTree = "<group>"; };
 		30E77111159EE78C00CB96AA /* icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon-114.png"; path = "../icon-114.png"; sourceTree = "<group>"; };
 		C18A0E1C15AD1110005D3E8A /* AccountCategory.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AccountCategory.xml; sourceTree = "<group>"; };
@@ -254,6 +269,7 @@
 		308918B71596CAAD000B5BE7 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				30B02FE915B99C9700D98FA2 /* PatternLockAppViewController.xib */,
 				C1AD3D5315B3E58E0058630D /* TimePickerController.xib */,
 				30C142E615AE398400FE2D7B /* Auxillary */,
 				3092292D15AB8AB3003BECF8 /* VIPController.xib */,
@@ -286,6 +302,9 @@
 		308D2BC21597C9A000B8AD88 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				30B02FE615B994D100D98FA2 /* PatternLockAppViewController.h */,
+				30B02FE715B994D100D98FA2 /* PatternLockAppViewController.m */,
+				30B02FDA15B9944E00D98FA2 /* UnlockerPattern */,
 				C195E88B15B56779002B17FA /* MoreViewController.h */,
 				C195E88C15B56779002B17FA /* MoreViewController.m */,
 				C1AD3D5115B3E58E0058630D /* TimePickerController.h */,
@@ -331,6 +350,19 @@
 				30ACB14915A18A6700BEE726 /* Reachability.m */,
 			);
 			name = Util;
+			sourceTree = "<group>";
+		};
+		30B02FDA15B9944E00D98FA2 /* UnlockerPattern */ = {
+			isa = PBXGroup;
+			children = (
+				30B02FDC15B9947B00D98FA2 /* dot_off.png */,
+				30B02FDD15B9947B00D98FA2 /* dot_on.png */,
+				30B02FDE15B9947B00D98FA2 /* DrawPatternLockView.h */,
+				30B02FDF15B9947B00D98FA2 /* DrawPatternLockView.m */,
+				30B02FE015B9947B00D98FA2 /* DrawPatternLockViewController.h */,
+				30B02FE115B9947B00D98FA2 /* DrawPatternLockViewController.m */,
+			);
+			name = UnlockerPattern;
 			sourceTree = "<group>";
 		};
 		30C142E615AE398400FE2D7B /* Auxillary */ = {
@@ -435,6 +467,9 @@
 				C195E89215B56865002B17FA /* third.png in Resources */,
 				C195E89315B56865002B17FA /* third@2x.png in Resources */,
 				C1BB26F015B6530C007037CC /* README in Resources */,
+				30B02FE215B9947B00D98FA2 /* dot_off.png in Resources */,
+				30B02FE315B9947B00D98FA2 /* dot_on.png in Resources */,
+				30B02FEA15B99C9700D98FA2 /* PatternLockAppViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +499,9 @@
 				C1AD3D5415B3E58E0058630D /* TimePickerController.m in Sources */,
 				C195E88E15B56779002B17FA /* MoreViewController.m in Sources */,
 				C1BB26F215B65318007037CC /* UILocalNotification.m in Sources */,
+				30B02FE415B9947B00D98FA2 /* DrawPatternLockView.m in Sources */,
+				30B02FE515B9947B00D98FA2 /* DrawPatternLockViewController.m in Sources */,
+				30B02FE815B994D100D98FA2 /* PatternLockAppViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

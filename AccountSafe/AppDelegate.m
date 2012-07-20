@@ -13,7 +13,7 @@
 #import "InAppRageIAPHelper.h"
 #import "constants.h"
 #import "AccountInfo.h"
-
+#import "PatternLockAppViewController.h"
 
 @interface AppDelegate()
 -(void)transferXMLWhenInstall;
@@ -41,10 +41,17 @@
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[InAppRageIAPHelper sharedHelper]];
     
     //ui 
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.viewController = [[[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil] autorelease];   
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+#ifdef kDigitPassword
+    self.viewController = [[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil];  
     self.naviController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
     [self.window addSubview:naviController.view];
+#else
+    self.viewController = [[PatternLockAppViewController alloc] initWithNibName:@"PatternLockAppViewController" bundle:nil]; 
+    self.naviController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
+    [self.window addSubview:naviController.view];
+#endif
+
         
     [self.window makeKeyAndVisible];
     

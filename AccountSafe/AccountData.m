@@ -218,7 +218,7 @@ static AccountData * sSharedInstance;
 #define kOpenDoorKey @"opendoor"
 
 +(NSString*)getOpenDoorKey
-{
+{   
     NSUserDefaults* defaultSetting = [NSUserDefaults standardUserDefaults];   
     return [defaultSetting valueForKey:kOpenDoorKey];
 }
