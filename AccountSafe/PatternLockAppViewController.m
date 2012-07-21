@@ -94,7 +94,7 @@
     {
         [self dismissModalViewControllerAnimated:YES];
         
-        //self.navigationController.navigationBarHidden = YES;
+        self.navigationController.navigationBarHidden = YES;
         
         [AccountData setOpenDoorKey:key];
         UIViewController* accountPageController = [[AccountSummaryController alloc]initWithNibName:@"AccountSummaryView" bundle:nil];
