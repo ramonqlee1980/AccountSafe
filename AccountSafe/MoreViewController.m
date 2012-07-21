@@ -33,12 +33,12 @@
 #define kNewPasscodePlaceholerKey @"NewPasscodeKey"   
 
 
-#define kMoreFeatureCount 4
+#define kMoreFeatureCount 3
 
 #define kMoreAbout 0
 #define kMoreFeedBack 1
-#define kMoreChangePasscode 2
-#define kMoreLocalAlert 3
+#define kMoreLocalAlert 2
+#define kMoreChangePasscode 3
 
 #define kMoreAboutKey @"kMoreAboutKey"
 #define kMoreFeedBackKey @"kMoreFeedBackKey"

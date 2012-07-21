@@ -14,10 +14,16 @@
 #import "constants.h"
 #import "AccountInfo.h"
 #import "PatternLockAppViewController.h"
+#import "ASIFormDataRequest.h"
+#import "JSONKit.h"
+
+#define kAppIdOnAppstore @"541440403"//for identifying app when updating
 
 @interface AppDelegate()
 -(void)transferXMLWhenInstall;
-
+-(void)checkUpdate;
++(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
+                         newVersion : (NSString *)newVersion;
 @end
 
 
@@ -26,6 +32,9 @@
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize naviController;
+@synthesize mTrackName;
+@synthesize mTrackViewUrl;
+
 
 
 #pragma mark app LifeCycle
@@ -36,6 +45,8 @@
     [mgr removeAllObjects];
 #endif
     [self transferXMLWhenInstall];
+    
+    [self checkUpdate];
     
     //in-app purchase
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[InAppRageIAPHelper sharedHelper]];
@@ -111,10 +122,17 @@
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.viewController = [[[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil] autorelease];
     
+#ifdef kDigitPassword
+    self.viewController = [[CheckViewController alloc] initWithNibName:@"CheckViewController_iPhone" bundle:nil];  
     self.naviController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
     [self.window addSubview:naviController.view];
+#else
+    self.viewController = [[PatternLockAppViewController alloc] initWithNibName:@"PatternLockAppViewController" bundle:nil]; 
+    self.naviController = [[UINavigationController alloc]initWithRootViewController:self.viewController];
+    [self.window addSubview:naviController.view];
+#endif
+    
     
     [self.window makeKeyAndVisible];
 }
@@ -146,6 +164,9 @@
 
 - (void)dealloc {
 	
+    [mTrackViewUrl release];
+    [mTrackName release];
+    
     [managedObjectContext release];
     managedObjectContext = nil;
     [managedObjectModel release];
@@ -317,5 +338,71 @@
     NSError* error = nil;
     NSString* bundleXmlFileName = [[NSBundle mainBundle]pathForResource:kAccountCategoryFileName ofType:kAccountCategoryFileType];
     [fm copyItemAtPath:bundleXmlFileName toPath:xmlFileName error:&error];
+}
+
+#pragma mark update
+- (void)alertView:(UIAlertView *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // the user clicked one of the OK/Cancel buttons
+    if (buttonIndex == 1)
+    {        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:mTrackViewUrl]];
+    }
+}
+-(void)checkUpdate
+{    
+    NSString *version = @"";
+    NSString* updateLookupUrl = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",kAppIdOnAppstore];
+    NSURL *url = [NSURL URLWithString:updateLookupUrl];
+    ASIFormDataRequest* versionRequest = [ASIFormDataRequest requestWithURL:url];
+    [versionRequest setRequestMethod:@"GET"];
+    [versionRequest setDelegate:self];
+    [versionRequest setTimeOutSeconds:150];
+    [versionRequest addRequestHeader:@"Content-Type" value:@"application/json"]; 
+    [versionRequest startSynchronous];
+    
+    //Response string of our REST call
+    NSString* jsonResponseString = [versionRequest responseString];
+    
+    NSDictionary *loginAuthenticationResponse = [jsonResponseString objectFromJSONString];
+    
+    NSArray *configData = [loginAuthenticationResponse valueForKey:@"results"];
+    NSString* releaseNotes;
+    for (id config in configData) 
+    {
+        version = [config valueForKey:@"version"];
+        self.mTrackViewUrl = [config valueForKey:@"trackViewUrl"];
+        releaseNotes = [config valueForKey:@"releaseNotes"]; 
+        self.mTrackName = [config valueForKey:@"trackName"];
+        NSLog(@"%@",mTrackName);
+    }
+    NSString *localVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    //Check your version with the version in app store
+    if ([AppDelegate CompareVersionFromOldVersion:localVersion newVersion:version]) 
+    {        
+        UIAlertView *createUserResponseAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewVersion", @"") message: @"" delegate:self cancelButtonTitle:NSLocalizedString(@"Back", @"") otherButtonTitles: NSLocalizedString(@"Ok", @""), nil];
+        [createUserResponseAlert show]; 
+        [createUserResponseAlert release];
+    }
+}
+// 比较oldVersion和newVersion，如果oldVersion比newVersion旧，则返回YES，否则NO
+// Version format[X.X.X]
++(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
+                         newVersion : (NSString *)newVersion
+{
+    NSArray*oldV = [oldVersion componentsSeparatedByString:@"."];
+    NSArray*newV = [newVersion componentsSeparatedByString:@"."];
+    
+    if (oldV.count == newV.count) {
+        for (NSInteger i = 0; i < oldV.count; i++) {
+            NSInteger old = [(NSString *)[oldV objectAtIndex:i] integerValue];
+            NSInteger new = [(NSString *)[newV objectAtIndex:i] integerValue];
+            if (old < new) {
+                return YES;
+            }
+        }
+        return NO;
+    } else {
+        return NO;
+    }
 }
 @end

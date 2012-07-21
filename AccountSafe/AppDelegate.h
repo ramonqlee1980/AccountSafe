@@ -29,11 +29,17 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
+    NSString* mTrackViewUrl;
+    NSString* mTrackName;
+    
     UINavigationController* naviController;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;	
 }
+@property (nonatomic, retain) NSString* mTrackViewUrl;
+@property (nonatomic, retain) NSString* mTrackName;
+
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
