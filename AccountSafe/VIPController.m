@@ -98,7 +98,7 @@
         msgLabel.text = NSLocalizedString(key, "");
         msgLabel.numberOfLines = kMaxNumberOfLines;
         msgLabel.textColor = [UIColor blueColor];
-        msgLabel.textAlignment = UITextAlignmentCenter;
+        msgLabel.textAlignment = UITextAlignmentLeft;
         
         msgLabel.layer.borderColor = [UIColor grayColor].CGColor;
         msgLabel.layer.borderWidth = 1.0;
@@ -119,7 +119,17 @@
         if (indexPath.section%2==0) {
             CGRect r = [[UIScreen mainScreen]applicationFrame];
             lblFrame.origin.x = r.size.width - lblFrame.size.width -kPaddingScreen;
-            bgrColor = [UIColor yellowColor];
+            bgrColor = [UIColor yellowColor];            
+        }
+        
+        //left origin & width
+        if(lblFrame.origin.x < 0)
+        {
+            lblFrame.origin.x = kPaddingScreen;
+        }
+        const NSInteger kMaxWidth = [[UIScreen mainScreen]applicationFrame].size.width - 2*kPaddingScreen;
+        if (lblFrame.size.width>kMaxWidth) {
+            lblFrame.size.width = kMaxWidth;
         }
         
         msgLabel.frame = lblFrame;
@@ -161,7 +171,7 @@
     if (self) {
         // Custom initialization
         self.title = NSLocalizedString(@"TabTitleVIP", "");
-        self.tabBarItem.image = [UIImage imageNamed:@"second"];
+        self.tabBarItem.image = [UIImage imageNamed:@"ICN_brand_ON"];
     }
     return self;
 }
@@ -179,6 +189,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Add inside viewWillAppear
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productsLoaded:) name:kProductsLoadedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(productPurchased:) name:kProductPurchasedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector: @selector(productPurchaseFailed:) name:kProductPurchaseFailedNotification object: nil]; 
     
     tableView.delegate = self;
     tableView.dataSource = self;   
@@ -212,6 +226,7 @@
 
 -(void)dealloc
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
     [_hud release];
     _hud = nil;
     self.tableView = nil;
@@ -228,6 +243,7 @@
 - (void)updateInterfaceWithReachability: (Reachability*) curReach {   
     
 }
+#pragma  mark inapp purchase
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -279,7 +295,7 @@
     
 }
 
-#pragma request purchase
+#pragma mark request purchase
 // Add new method
 -(IBAction)rightItemClickInAppPurchase:(id)sender
 {   

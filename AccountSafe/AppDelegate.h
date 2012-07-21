@@ -13,7 +13,7 @@
 
 #define kDebugVersion NO//for test only
 
-#define kInAppPurchaseProductName @"com.idreems.AccountSafe"
+#define kInAppPurchaseProductName @"com.idreems.AccountSafe.VIP"
 
 #define MANAGED_CONTEXT [((AppDelegate*)[[UIApplication sharedApplication]delegate]) managedObjectContext]
 #define APPDELEGATE    [[UIApplication sharedApplication]delegate]

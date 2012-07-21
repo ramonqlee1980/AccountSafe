@@ -228,7 +228,7 @@ break;
     if (self) {
         // Custom initialization        
         self.title = NSLocalizedString(@"TabTitleMore", "");
-        self.tabBarItem.image = [UIImage imageNamed:@"third"];
+        self.tabBarItem.image = [UIImage imageNamed:@"ICN_more_ON"];
     }
     return self;
 }

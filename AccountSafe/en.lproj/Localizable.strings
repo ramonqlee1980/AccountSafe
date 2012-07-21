@@ -42,11 +42,10 @@ CFBundleDisplayName="AccountSafe";
 "About"="Version V1.1.2 IDreems.com Presents";
 
 
-
 //
 "Add"="Add Category";
 "Purchase"="Purchase";
-"Set"="Set";
+"Set"="Set Passcode";
 "Enter"="Enter";
 "Back"="Back";
 "invalid_data_title"="Invalid Data";

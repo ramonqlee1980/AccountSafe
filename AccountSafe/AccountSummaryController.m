@@ -185,7 +185,7 @@
     if (self) {
         // Custom initialization
         self.title = NSLocalizedString(@"TabTitleSummary", "");
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.tabBarItem.image = [UIImage imageNamed:@"ICN_account_ON"];
     }
     return self;
 }

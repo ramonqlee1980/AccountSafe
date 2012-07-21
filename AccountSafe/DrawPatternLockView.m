@@ -35,7 +35,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 10.0);
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[] = {0.5, 0.5, 0.5, 0.8};
+    CGFloat components[] = {0, 0, 1, 1};//{0.5, 0.5, 0.5, 0.8};
     CGColorRef color = CGColorCreate(colorspace, components);
     CGContextSetStrokeColorWithColor(context, color);
     
