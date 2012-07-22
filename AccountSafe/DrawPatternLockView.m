@@ -35,12 +35,12 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 10.0);
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    CGFloat components[] = {0, 0, 1, 1};//{0.5, 0.5, 0.5, 0.8};
+    CGFloat components[] = {0.5, 0.5, 0.5, 0.8};
     CGColorRef color = CGColorCreate(colorspace, components);
     CGContextSetStrokeColorWithColor(context, color);
     
     CGPoint from;
-    UIView *lastDot;
+    UIView *lastDot = nil;
     NSLog(@"dotViews retainCount:%d",[_dotViews retainCount]);
     for (UIView *dotView in _dotViews) {
         from = dotView.center;
