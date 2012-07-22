@@ -91,6 +91,10 @@
 		C1AD3D5515B3E58E0058630D /* TimePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1AD3D5315B3E58E0058630D /* TimePickerController.xib */; };
 		C1BB26F015B6530C007037CC /* README in Resources */ = {isa = PBXBuildFile; fileRef = C1BB26EE15B6530C007037CC /* README */; };
 		C1BB26F215B65318007037CC /* UILocalNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = C1BB26F115B65318007037CC /* UILocalNotification.m */; };
+		C1D955BA15BCB79E001330D3 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = C1D955B515BCB79E001330D3 /* bubble.png */; };
+		C1D955BB15BCB79E001330D3 /* bubbleSelf.png in Resources */ = {isa = PBXBuildFile; fileRef = C1D955B615BCB79E001330D3 /* bubbleSelf.png */; };
+		C1D955BC15BCB79E001330D3 /* default_head_online.png in Resources */ = {isa = PBXBuildFile; fileRef = C1D955B715BCB79E001330D3 /* default_head_online.png */; };
+		C1D955BD15BCB79E001330D3 /* face_test.png in Resources */ = {isa = PBXBuildFile; fileRef = C1D955B815BCB79E001330D3 /* face_test.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,6 +232,10 @@
 		C1BB26EE15B6530C007037CC /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		C1BB26EF15B6530C007037CC /* UILocalNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILocalNotification.h; sourceTree = "<group>"; };
 		C1BB26F115B65318007037CC /* UILocalNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILocalNotification.m; sourceTree = "<group>"; };
+		C1D955B515BCB79E001330D3 /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubble.png; sourceTree = "<group>"; };
+		C1D955B615BCB79E001330D3 /* bubbleSelf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bubbleSelf.png; sourceTree = "<group>"; };
+		C1D955B715BCB79E001330D3 /* default_head_online.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_head_online.png; sourceTree = "<group>"; };
+		C1D955B815BCB79E001330D3 /* face_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face_test.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -305,6 +313,10 @@
 		3083B8C11596AA8600E94875 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C1D955B515BCB79E001330D3 /* bubble.png */,
+				C1D955B615BCB79E001330D3 /* bubbleSelf.png */,
+				C1D955B715BCB79E001330D3 /* default_head_online.png */,
+				C1D955B815BCB79E001330D3 /* face_test.png */,
 				3093BD0415BA8882001F3F33 /* ICN_account_ON.png */,
 				3093BD0515BA8882001F3F33 /* ICN_account_ON@2x.png */,
 				3093BD0615BA8882001F3F33 /* ICN_brand_ON.png */,
@@ -611,6 +623,10 @@
 				3093BD0D15BA8883001F3F33 /* ICN_brand_ON@2x.png in Resources */,
 				3093BD0E15BA8883001F3F33 /* ICN_more_ON.png in Resources */,
 				3093BD0F15BA8883001F3F33 /* ICN_more_ON@2x.png in Resources */,
+				C1D955BA15BCB79E001330D3 /* bubble.png in Resources */,
+				C1D955BB15BCB79E001330D3 /* bubbleSelf.png in Resources */,
+				C1D955BC15BCB79E001330D3 /* default_head_online.png in Resources */,
+				C1D955BD15BCB79E001330D3 /* face_test.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

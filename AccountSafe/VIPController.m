@@ -13,6 +13,14 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
+
+#define TOOLBARTAG		200
+#define TABLEVIEWTAG	300
+
+
+#define BEGIN_FLAG @"[/"
+#define END_FLAG @"]"
+
 @interface VIPController()
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action;
 - (NSString *)localizedPrice:(NSLocale *)priceLocale price:(NSDecimalNumber *)price;
@@ -50,6 +58,51 @@
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+#define kVIPCell @"VIPCell"
+
+    UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:kVIPCell];
+    if (nil==cell) {
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kVIPCell]autorelease];
+    }
+        
+    //1 category edit
+    //1.1add new category count
+    //1.2delete category
+    NSString* key = nil;
+    
+    //2.alarm to change passcode    
+    switch (indexPath.section) {
+        case kVIPNewCategory:
+            key = kVIPNewCategoryKey;
+            break;
+        case kVIPDeleteCategory:
+            key = kVIPDeleteCategoryKey;
+            break;
+        case kVIPSetAlarm:
+            key = kVIPSetAlarmKey;
+            break;
+        case kVIPMoreFeatures:
+            key = kVIPMoreFeaturesKey;
+        default:
+            break;
+    }
+    
+    //remove cell's background
+    [cell setBackgroundColor:[UIColor clearColor]];
+    UIView* b = [[UIView alloc]init];
+    [cell setBackgroundView:b];
+    [b release];
+    
+    if (key) {
+        BOOL fromSelf = (indexPath.section%2==0);
+        //TODO::reuse bubbleView later
+        UIView* bubbleView = [self bubbleView:NSLocalizedString(key, "") from:fromSelf];
+        [cell.contentView addSubview:bubbleView];        
+    }        
+    return cell;
+}
+/*- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 #define kVIPCell @"VIPCell"
 #define kTextLaybleFlag 0x100
@@ -137,16 +190,6 @@
     }    
     
     return cell;
-}
-/*
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    NSString* r = nil;
-    if (section == kVIPNewCategory) {
-        r = NSLocalizedString(kVIPFeatureListTitle, "");
-    }
-    
-    return r;
 }*/
 
 #pragma mark tableview delegate
@@ -356,5 +399,147 @@
     
 }
 
+
+#pragma mark bubble support
+
+//图文混排
+
+-(void)getImageRange:(NSString*)message : (NSMutableArray*)array {
+    NSRange range=[message rangeOfString: BEGIN_FLAG];
+    NSRange range1=[message rangeOfString: END_FLAG];
+    //判断当前字符串是否还有表情的标志。
+    if (range.length>0 && range1.length>0) {
+        if (range.location > 0) {
+            [array addObject:[message substringToIndex:range.location]];
+            [array addObject:[message substringWithRange:NSMakeRange(range.location, range1.location+1-range.location)]];
+            NSString *str=[message substringFromIndex:range1.location+1];
+            [self getImageRange:str :array];
+        }else {
+            NSString *nextstr=[message substringWithRange:NSMakeRange(range.location, range1.location+1-range.location)];
+            //排除文字是“”的
+            if (![nextstr isEqualToString:@""]) {
+                [array addObject:nextstr];
+                NSString *str=[message substringFromIndex:range1.location+1];
+                [self getImageRange:str :array];
+            }else {
+                return;
+            }
+        }
+        
+    } else if (message != nil) {
+        [array addObject:message];
+    }
+}
+
+#define KFacialSizeWidth  18
+#define KFacialSizeHeight 18
+#define MAX_WIDTH 150
+-(UIView *)assembleMessageAtIndex : (NSString *) message from:(BOOL)fromself
+{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [self getImageRange:message :array];
+    UIView *returnView = [[UIView alloc] initWithFrame:CGRectZero];
+    NSArray *data = array;
+    UIFont *fon = [UIFont systemFontOfSize:13.0f];
+    CGFloat upX = 0;
+    CGFloat upY = 0;
+    CGFloat X = 0;
+    CGFloat Y = 0;
+    if (data) {
+        for (int i=0;i < [data count];i++) {
+            NSString *str=[data objectAtIndex:i];
+            NSLog(@"str--->%@",str);
+            if ([str hasPrefix: BEGIN_FLAG] && [str hasSuffix: END_FLAG])
+            {
+                if (upX >= MAX_WIDTH)
+                {
+                    upY = upY + KFacialSizeHeight;
+                    upX = 0;
+                    X = 150;
+                    Y = upY;
+                }
+                NSLog(@"str(image)---->%@",str);
+                NSString *imageName=[str substringWithRange:NSMakeRange(2, str.length - 3)];
+                UIImageView *img=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
+                img.frame = CGRectMake(upX, upY, KFacialSizeWidth, KFacialSizeHeight);
+                [returnView addSubview:img];
+                [img release];
+                upX=KFacialSizeWidth+upX;
+                if (X<150) X = upX;
+                
+                
+            } else {
+                for (int j = 0; j < [str length]; j++) {
+                    NSString *temp = [str substringWithRange:NSMakeRange(j, 1)];
+                    if (upX >= MAX_WIDTH)
+                    {
+                        upY = upY + KFacialSizeHeight;
+                        upX = 0;
+                        X = 150;
+                        Y =upY;
+                    }
+                    CGSize size=[temp sizeWithFont:fon constrainedToSize:CGSizeMake(150, 40)];
+                    UILabel *la = [[UILabel alloc] initWithFrame:CGRectMake(upX,upY,size.width,size.height)];
+                    la.font = fon;
+                    la.text = temp;
+                    la.backgroundColor = [UIColor clearColor];
+                    [returnView addSubview:la];
+                    [la release];
+                    upX=upX+size.width;
+                    if (X<150) {
+                        X = upX;
+                    }
+                }
+            }
+        }
+    }
+    returnView.frame = CGRectMake(15.0f,1.0f, X, Y); //@ 需要将该view的尺寸记下，方便以后使用
+    NSLog(@"%.1f %.1f", X, Y);
+    return returnView;
+}
+
+/*
+ 生成泡泡UIView
+ */
+#pragma mark -
+#pragma mark Table view methods
+- (UIView *)bubbleView:(NSString *)text from:(BOOL)fromSelf {
+	// build single chat bubble cell with given text
+    UIView *returnView =  [self assembleMessageAtIndex:text from:fromSelf];
+    returnView.backgroundColor = [UIColor clearColor];
+    UIView *cellView = [[UIView alloc] initWithFrame:CGRectZero];
+    cellView.backgroundColor = [UIColor clearColor];
+    
+	UIImage *bubble = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:fromSelf?@"bubbleSelf":@"bubble" ofType:@"png"]];
+	UIImageView *bubbleImageView = [[UIImageView alloc] initWithImage:[bubble stretchableImageWithLeftCapWidth:20 topCapHeight:14]];
+    
+    UIImageView *headImageView = [[UIImageView alloc] init];
+    
+    if(fromSelf){
+        [headImageView setImage:[UIImage imageNamed:@"face_test.png"]];
+        returnView.frame= CGRectMake(9.0f, 15.0f, returnView.frame.size.width, returnView.frame.size.height);
+        bubbleImageView.frame = CGRectMake(0.0f, 14.0f, returnView.frame.size.width+24.0f, returnView.frame.size.height+24.0f );
+        cellView.frame = CGRectMake(265.0f-bubbleImageView.frame.size.width, 0.0f,bubbleImageView.frame.size.width+50.0f, bubbleImageView.frame.size.height+30.0f);
+        headImageView.frame = CGRectMake(bubbleImageView.frame.size.width, cellView.frame.size.height-50.0f, 50.0f, 50.0f);
+    }
+	else{
+        [headImageView setImage:[UIImage imageNamed:@"default_head_online.png"]];
+        returnView.frame= CGRectMake(65.0f, 15.0f, returnView.frame.size.width, returnView.frame.size.height);
+        bubbleImageView.frame = CGRectMake(50.0f, 14.0f, returnView.frame.size.width+24.0f, returnView.frame.size.height+24.0f);
+		cellView.frame = CGRectMake(0.0f, 0.0f, bubbleImageView.frame.size.width+30.0f,bubbleImageView.frame.size.height+30.0f);
+        headImageView.frame = CGRectMake(0.0f, cellView.frame.size.height-50.0f, 50.0f, 50.0f);
+    }
+    
+    
+    
+    [cellView addSubview:bubbleImageView];
+    [cellView addSubview:headImageView];
+    [cellView addSubview:returnView];
+    [bubbleImageView release];
+    [returnView release];
+    [headImageView release];
+	return [cellView autorelease];
+    
+}
 
 @end
