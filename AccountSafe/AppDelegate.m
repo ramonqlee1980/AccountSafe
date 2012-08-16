@@ -17,6 +17,8 @@
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
 
+#define kDigitPassword
+
 #define kAppIdOnAppstore @"541440403"//for identifying app when updating
 
 @interface AppDelegate()
