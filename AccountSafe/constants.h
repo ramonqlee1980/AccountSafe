@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#define k91Appstore    //for 91 appstore distribution
+#define kDebugVersion NO//for test only
+
+
+#define kInAppPurchaseProductName @"com.idreems.AccountSafe.VIP"
+
 #define kAccountCategoryFileNameWithSuffix @"AccountCategory.xml"
 #define kAccountCategoryFileName @"AccountCategory"
 #define kAccountCategoryFileType @"xml"

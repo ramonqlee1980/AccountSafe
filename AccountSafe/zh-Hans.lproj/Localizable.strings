@@ -17,6 +17,7 @@ CFBundleDisplayName="帐号管家";
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "帐号列表";
 "TabTitleMore"="...";
+"kRecommendList"="推荐";
 
 //passcode changing tips
 "kChangePasscodeTipCommonErrorKey"="密码不能为空";

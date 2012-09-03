@@ -17,6 +17,7 @@ CFBundleDisplayName="帳號管家";
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
 "TabTitleMore"="...";
+"kRecommendList"="Recommend";
 
 //passcode changing tips
 "kChangePasscodeTipCommonErrorKey"="Empty passcode is not allowed";

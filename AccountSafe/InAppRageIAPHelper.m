@@ -7,7 +7,7 @@
 //
 
 #import "InAppRageIAPHelper.h"
-#import "AppDelegate.h"
+#import "constants.h"
 @implementation InAppRageIAPHelper
 
 static InAppRageIAPHelper * _sharedHelper;

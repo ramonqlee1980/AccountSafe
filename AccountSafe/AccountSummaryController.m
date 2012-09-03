@@ -14,7 +14,9 @@
 #import "GDataXMLNode.h"
 #import "constants.h"
 #import "AppDelegate.h"
-
+#import "AdSageRecommendView.h"
+#import "AdSageManager.h"
+#import "AdsConfig.h"
 
 #define kTitleRow 0
 #define kCategoryRowStart (kTitleRow+1)
@@ -24,11 +26,13 @@
 
 @interface AccountSummaryController()
 -(void)persistentCategoryData;
+-(void)loadYoumiWall:(BOOL)credit;
+-(void)loadAdsageRecommendView;
 @end
 
 @implementation AccountSummaryController
 @synthesize tableView=_tableView;
-
+@synthesize recmdView = _recmdView;
 
 
 #pragma tableview datasource 
@@ -275,7 +279,15 @@
 }
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
-{      
+{ 
+    AdsConfig* config = [AdsConfig sharedAdsConfig];
+//    if([config wallShouldShow])
+    {
+        [self loadFeaturedYoumiWall];
+        [self loadAdsageRecommendView];
+    }
+    
+    
     [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
     _accountData = [AccountData shareInstance];
     
@@ -330,4 +342,65 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+-(void)loadYoumiWall:(BOOL)credit
+{       
+    //load youmi wall
+    if(!wall)
+    {
+        wall = [[YouMiWall alloc] init];
+        wall.delegate = self;
+        wall.appID = kDefaultAppID_iOS;
+        wall.appSecret = kDefaultAppSecret_iOS;
+    }
+    if(credit)
+    {  
+        // 添加应用列表开放源观察者
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestOffersOpenDataSuccess:) name:YOUMI_OFFERS_APP_DATA_RESPONSE_NOTIFICATION object:nil];
+        
+        [wall requestOffersAppData:YES pageCount:15];
+    }
+    else
+    {      
+        // 添加应用列表开放源观察者
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestFeaturedOffersSuccess) name:YOUMI_FEATURED_APP_RESPONSE_NOTIFICATION object:nil];
+        
+        [wall requestFeaturedApp:YES];        
+    }
+}
+-(void)loadAdsageRecommendView
+{
+    [[AdSageManager getInstance]setAdSageKey:kMobiSageID_iPhone];
+    if (self.recmdView == nil) {
+        
+        self.recmdView = [AdSageRecommendView requestWithDelegate:self color:AdSageRecommendColorTypeOrange];
+        self.recmdView.frame = CGRectMake(20, 70, self.recmdView.frame.size.width, self.recmdView.frame.size.height);
+    }    
+    
+    //add to navigation 
+    UIBarButtonItem *naviLeftItem = [[UIBarButtonItem alloc] initWithCustomView:self.recmdView];    
+	self.navigationItem.leftBarButtonItem = naviLeftItem;
+    [naviLeftItem release];
+}
+-(void)loadFeaturedYoumiWall
+{    
+    //    if(!mYoumiFeaturedWallShown)
+    {
+        [self loadYoumiWall:NO];
+    }
+}
+
+#pragma mark - YouMiWall delegate
+-(void)requestFeaturedOffersSuccess
+{
+    //    mYoumiFeaturedWallLoadSuccess = YES;
+    //    mYoumiFeaturedWallShown = YES;
+    //    mYoumiFeaturedWallClosed = NO;
+    if(!self.view.isHidden)
+        [wall showFeaturedApp:YouMiWallAnimationTransitionPushFromBottom];
+}
+#pragma mark AdSageRecommendDelegate
+- (UIViewController *)viewControllerForPresentingModalView
+{
+    return self;
+}
 @end

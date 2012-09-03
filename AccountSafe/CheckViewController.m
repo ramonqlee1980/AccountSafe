@@ -11,6 +11,8 @@
 #import "VIPController.h"
 #import "AccountSummaryController.h"
 #import "MoreViewController.h"
+#import "SoftRcmListViewController.h"
+#import "constants.h"
 
 @implementation CheckViewController
 
@@ -76,8 +78,11 @@
         mPassword.text = @"";
         UIViewController* accountPageController = [[AccountSummaryController alloc]initWithNibName:@"AccountSummaryView" bundle:nil];
         UINavigationController* accountPageControllerNavi = [[UINavigationController alloc]initWithRootViewController:accountPageController];
-        
+#ifndef k91Appstore
         UIViewController* vipCtrl = [[VIPController alloc]initWithNibName:@"VIPController" bundle:nil];
+#else
+        UIViewController* vipCtrl = [[SoftRcmListViewController alloc]initWithStyle:UITableViewStyleGrouped];    
+#endif
         UINavigationController* vipNavi = [[UINavigationController alloc]initWithRootViewController:vipCtrl];  
         
         UIViewController* moreCtrl = [[MoreViewController alloc]initWithNibName:@"MoreViewController" bundle:nil];

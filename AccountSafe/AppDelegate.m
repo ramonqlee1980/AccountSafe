@@ -16,21 +16,30 @@
 #import "PatternLockAppViewController.h"
 #import "ASIFormDataRequest.h"
 #import "JSONKit.h"
+#import "AdsConfig.h"
+#import "NetworkManager.h"
+
 
 #define kDigitPassword
 
-#define kAppIdOnAppstore @"541440403"//for identifying app when updating
 
 @interface AppDelegate()
+-(void)startAdsConfigReceive;
 -(void)transferXMLWhenInstall;
 -(void)checkUpdate;
 +(BOOL)CompareVersionFromOldVersion : (NSString *)oldVersion
                          newVersion : (NSString *)newVersion;
+@property (nonatomic, assign, readonly ) BOOL                               isReceiving;
+@property (nonatomic, retain,readwrite) NSURLConnection *                  connection;
+@property (nonatomic, copy,   readwrite) NSString *                         filePath;
+@property (nonatomic, retain,readwrite) NSOutputStream *                   fileStream;
 @end
 
 
 @implementation AppDelegate
-
+@synthesize connection    = _connection;
+@synthesize filePath      = _filePath;
+@synthesize fileStream    = _fileStream;
 @synthesize window = _window;
 @synthesize viewController = _viewController;
 @synthesize naviController;
@@ -48,7 +57,10 @@
 #endif
     [self transferXMLWhenInstall];
     
+#ifdef k91Appstore
     [self checkUpdate];
+    [self startAdsConfigReceive];
+#endif
     
     //in-app purchase
     [[SKPaymentQueue defaultQueue] addTransactionObserver:[InAppRageIAPHelper sharedHelper]];
@@ -315,10 +327,14 @@
     if (kDebugVersion == YES) {
         return YES;
     }
+#ifdef k91Appstore
+    return YES;
+#else
     
     BOOL r = [[InAppRageIAPHelper sharedHelper].purchasedProducts containsObject:kInAppPurchaseProductName];   
     NSLog(@"isPurchased:%d",r);
     return r;
+#endif
 }
 
 #pragma mark transferXML
@@ -406,5 +422,193 @@
     } else {
         return NO;
     }
+}
+
+#pragma mark * Core transfer code
+
+// This is the code that actually does the networking.
+
+- (BOOL)isReceiving
+{
+    return (self.connection != nil);
+}
+
+- (void)startAdsConfigReceive
+// Starts a connection to download the current URL.
+{
+    BOOL                success;
+    NSURL *             url;	
+    NSURLRequest *      request;
+    if(self.connection!=nil)
+    {
+        return;
+    }
+    
+    assert(self.connection == nil);         // don't tap receive twice in a row!
+    assert(self.fileStream == nil);         // ditto
+    assert(self.filePath == nil);           // ditto
+    
+    // First get and check the URL.
+    
+    url = [[NetworkManager sharedInstance] smartURLForString:AdsUrl];
+    success = (url != nil);
+    
+    // If the URL is bogus, let the user know.  Otherwise kick off the connection.
+    
+    if ((url != nil)) {
+        
+        // Open a stream for the file we're going to receive into.
+        
+        self.filePath = [[NetworkManager sharedInstance] pathForTemporaryFileWithPrefix:@"Get"];
+        assert(self.filePath != nil);
+        
+        //remove this file first
+        NSError* error;
+        NSFileManager* fileMgr = [NSFileManager defaultManager];
+        if ([fileMgr fileExistsAtPath:self.filePath]) {
+            if (![fileMgr removeItemAtPath:self.filePath error:&error])
+                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
+        }
+        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:NO];
+        assert(self.fileStream != nil);
+        
+        [self.fileStream open];
+        
+        // Open a connection for the URL.
+        
+        request = [NSURLRequest requestWithURL:url];
+        assert(request != nil);
+        
+        self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        assert(self.connection != nil);
+        [[NetworkManager sharedInstance] didStartNetworkOperation];
+    }
+}
+- (void)receiveDidStopWithStatus:(NSString *)statusString
+{
+    if (statusString == nil) {
+        assert(self.filePath != nil);
+        //load ads config
+        [AdsConfig reset];
+        [self parseAdsConfig];
+        
+        AdsConfig* config = [AdsConfig sharedAdsConfig];      
+        
+        //show close ads 
+        if([config wallShouldShow])
+        {
+            //notify observers
+            [[NSNotificationCenter defaultCenter]postNotificationName:kAdsUpdateDidFinishLoading object:nil];
+        }
+        
+    }    
+    [[NetworkManager sharedInstance] didStopNetworkOperation];
+}
+- (void)stopReceiveWithStatus:(NSString *)statusString
+// Shuts down the connection and displays the result (statusString == nil) 
+// or the error status (otherwise).
+{
+    if (self.connection != nil) {
+        [self.connection cancel];
+        self.connection = nil;
+    }
+    if (self.fileStream != nil) {
+        [self.fileStream close];
+        self.fileStream = nil;
+    }
+    [self receiveDidStopWithStatus:statusString];
+    self.filePath = nil;
+}
+
+- (void)connection:(NSURLConnection *)theConnection didReceiveResponse:(NSURLResponse *)response
+// A delegate method called by the NSURLConnection when the request/response 
+// exchange is complete.  We look at the response to check that the HTTP 
+// status code is 2xx and that the Content-Type is acceptable.  If these checks 
+// fail, we give up on the transfer.
+{
+#pragma unused(theConnection)
+    NSHTTPURLResponse * httpResponse;
+    NSString *          contentTypeHeader;
+    
+    assert(theConnection == self.connection);
+    
+    httpResponse = (NSHTTPURLResponse *) response;
+    assert( [httpResponse isKindOfClass:[NSHTTPURLResponse class]] );
+    
+    if ((httpResponse.statusCode / 100) != 2) {
+        [self stopReceiveWithStatus:[NSString stringWithFormat:@"HTTP error %zd", (ssize_t) httpResponse.statusCode]];
+    } else {
+        // -MIMEType strips any parameters, strips leading or trailer whitespace, and lower cases 
+        // the string, so we can just use -isEqual: on the result.
+        contentTypeHeader = [httpResponse MIMEType];
+        if (contentTypeHeader == nil) {
+            [self stopReceiveWithStatus:@"No Content-Type!"];
+        } 
+        //        else if ( ! [contentTypeHeader isEqual:@"image/jpeg"] 
+        //                   && ! [contentTypeHeader isEqual:@"image/png"] 
+        //                   && ! [contentTypeHeader isEqual:@"image/gif"] ) {
+        //            [self stopReceiveWithStatus:[NSString stringWithFormat:@"Unsupported Content-Type (%@)", contentTypeHeader]];
+        //        }
+    }    
+}
+
+- (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)dataRev
+// A delegate method called by the NSURLConnection as data arrives.  We just 
+// write the data to the file.
+{
+#pragma unused(theConnection)
+    NSInteger       dataLength;
+    const uint8_t * dataBytes;
+    NSInteger       bytesWritten;
+    NSInteger       bytesWrittenSoFar;
+    
+    assert(theConnection == self.connection);
+    
+    dataLength = [dataRev length];
+    dataBytes  = [dataRev bytes];
+    
+    bytesWrittenSoFar = 0;
+    do {
+        bytesWritten = [self.fileStream write:&dataBytes[bytesWrittenSoFar] maxLength:dataLength - bytesWrittenSoFar];
+        assert(bytesWritten != 0);
+        if (bytesWritten == -1) {
+            [self stopReceiveWithStatus:@"File write error"];
+            break;
+        } else {
+            bytesWrittenSoFar += bytesWritten;
+        }
+    } while (bytesWrittenSoFar != dataLength);
+}
+
+- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
+// A delegate method called by the NSURLConnection if the connection fails. 
+// We shut down the connection and display the failure.  Production quality code 
+// would either display or log the actual error.
+{
+#pragma unused(theConnection)
+#pragma unused(error)
+    assert(theConnection == self.connection);
+    
+    [self stopReceiveWithStatus:@"Connection failed"];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)theConnection
+// A delegate method called by the NSURLConnection when the connection has been 
+// done successfully.  We shut down the connection with a nil status, which 
+// causes the image to be displayed.
+{
+#pragma unused(theConnection)
+    assert(theConnection == self.connection);   
+    
+    [self stopReceiveWithStatus:nil];
+}
+/**
+ parse ads config from server 
+ if failed to get configuration,just use the default config
+ */
+-(void)parseAdsConfig
+{
+    AdsConfig *config = [AdsConfig sharedAdsConfig];
+    [config init:self.filePath];
 }
 @end

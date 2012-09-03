@@ -17,6 +17,7 @@ CFBundleDisplayName="AccountSafe";
 "TabTitleVIP" = "VIP";
 "TabTitleSummary" = "Accounts";
 "TabTitleMore"="...";
+"kRecommendList"="Recommend";
 
 
 "OriginalPasscodeKey"="Original Passcode";
