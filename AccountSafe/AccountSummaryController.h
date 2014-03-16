@@ -7,20 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "YouMiWall.h"
-#import "AdSageRecommendDelegate.h"
 
 @class AdSageRecommendView;
 
 @class AccountData;
-@interface AccountSummaryController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,YouMiWallDelegate,AdSageRecommendDelegate>
+@interface AccountSummaryController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 {
     UITableView* _tableView;
     AccountData* _accountData;
-    YouMiWall *wall;
-    AdSageRecommendView *_recmdView;
 }
-@property(nonatomic, retain) AdSageRecommendView *recmdView;
 
 @property (nonatomic,retain) IBOutlet UITableView* tableView;
 

@@ -14,9 +14,6 @@
 #import "GDataXMLNode.h"
 #import "constants.h"
 #import "AppDelegate.h"
-#import "AdSageRecommendView.h"
-#import "AdSageManager.h"
-#import "AdsConfig.h"
 
 #define kTitleRow 0
 #define kCategoryRowStart (kTitleRow+1)
@@ -26,13 +23,10 @@
 
 @interface AccountSummaryController()
 -(void)persistentCategoryData;
--(void)loadYoumiWall:(BOOL)credit;
--(void)loadAdsageRecommendView;
 @end
 
 @implementation AccountSummaryController
 @synthesize tableView=_tableView;
-@synthesize recmdView = _recmdView;
 
 
 #pragma tableview datasource 
@@ -220,16 +214,7 @@
 {
 #define kOK 1
     if (buttonIndex == kOK) {
-        UITextField* f = nil;//[alertView textFieldAtIndex:0];
-        //find textfield
-        NSArray* subviews = [alertView subviews];
-        for (id view in subviews) {
-            if([view isKindOfClass:[UITextField class]])
-            {
-                f = (UITextField*)view;
-                break;
-            }
-        }
+        UITextField* f = [alertView textFieldAtIndex:0];
         if (nil==f || nil == f.text || 0 == f.text.length) {
             return;
         }
@@ -253,22 +238,13 @@
 -(IBAction)addAccountCategory:(id)sender
 {
     VIP_FEATURES_TIP;
+
     // Ask for Username and password.
     UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewAccountCategory", "") message:@"\n" delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", "") otherButtonTitles:NSLocalizedString(@"OK", ""), nil];
-    // Adds a username Field
-    UITextField* utextfield = [[UITextField alloc] initWithFrame:CGRectMake(12.0, 45.0, 260.0, 25.0)]; 
-    utextfield.placeholder = NSLocalizedString(@"Name", "");
-    [utextfield setBackgroundColor:[UIColor whiteColor]];
-    utextfield.enablesReturnKeyAutomatically = YES;
-    [utextfield setReturnKeyType:UIReturnKeyDone];   
-    utextfield.borderStyle = UITextBorderStyleRoundedRect;
-    [utextfield performSelector:@selector(becomeFirstResponder) withObject:nil afterDelay:0.05];    
-    [alertView addSubview:utextfield];
-    [utextfield release];
+    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     
     // Show alert on screen.
     [alertView show];
-    [alertView release];
 }
 -(void)setRightClick:(NSString*)title buttonName:(NSString*)buttonName action:(SEL)action
 {
@@ -280,14 +256,6 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 { 
-    AdsConfig* config = [AdsConfig sharedAdsConfig];
-//    if([config wallShouldShow])
-    {
-        [self loadFeaturedYoumiWall];
-        [self loadAdsageRecommendView];
-    }
-    
-    
     [self setRightClick:NSLocalizedString(@"CFBundleDisplayName", @"") buttonName:NSLocalizedString(@"Add", "") action:@selector(addAccountCategory:)];
     _accountData = [AccountData shareInstance];
     
@@ -342,65 +310,4 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
--(void)loadYoumiWall:(BOOL)credit
-{       
-    //load youmi wall
-    if(!wall)
-    {
-        wall = [[YouMiWall alloc] init];
-        wall.delegate = self;
-        wall.appID = kDefaultAppID_iOS;
-        wall.appSecret = kDefaultAppSecret_iOS;
-    }
-    if(credit)
-    {  
-        // 添加应用列表开放源观察者
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestOffersOpenDataSuccess:) name:YOUMI_OFFERS_APP_DATA_RESPONSE_NOTIFICATION object:nil];
-        
-        [wall requestOffersAppData:YES pageCount:15];
-    }
-    else
-    {      
-        // 添加应用列表开放源观察者
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestFeaturedOffersSuccess) name:YOUMI_FEATURED_APP_RESPONSE_NOTIFICATION object:nil];
-        
-        [wall requestFeaturedApp:YES];        
-    }
-}
--(void)loadAdsageRecommendView
-{
-    [[AdSageManager getInstance]setAdSageKey:kMobiSageID_iPhone];
-    if (self.recmdView == nil) {
-        
-        self.recmdView = [AdSageRecommendView requestWithDelegate:self color:AdSageRecommendColorTypeOrange];
-        self.recmdView.frame = CGRectMake(20, 70, self.recmdView.frame.size.width, self.recmdView.frame.size.height);
-    }    
-    
-    //add to navigation 
-    UIBarButtonItem *naviLeftItem = [[UIBarButtonItem alloc] initWithCustomView:self.recmdView];    
-	self.navigationItem.leftBarButtonItem = naviLeftItem;
-    [naviLeftItem release];
-}
--(void)loadFeaturedYoumiWall
-{    
-    //    if(!mYoumiFeaturedWallShown)
-    {
-        [self loadYoumiWall:NO];
-    }
-}
-
-#pragma mark - YouMiWall delegate
--(void)requestFeaturedOffersSuccess
-{
-    //    mYoumiFeaturedWallLoadSuccess = YES;
-    //    mYoumiFeaturedWallShown = YES;
-    //    mYoumiFeaturedWallClosed = NO;
-    if(!self.view.isHidden)
-        [wall showFeaturedApp:YouMiWallAnimationTransitionPushFromBottom];
-}
-#pragma mark AdSageRecommendDelegate
-- (UIViewController *)viewControllerForPresentingModalView
-{
-    return self;
-}
 @end

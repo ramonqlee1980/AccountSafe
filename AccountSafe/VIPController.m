@@ -9,7 +9,7 @@
 #import "VIPController.h"
 #import "InAppRageIAPHelper.h"
 #import "MBProgressHUD.h"
-#import "Reachability.h"
+#import "ReachabilityAs.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -283,7 +283,7 @@
     self.hud = nil;
     
 }
-- (void)updateInterfaceWithReachability: (Reachability*) curReach {   
+- (void)updateInterfaceWithReachability: (ReachabilityAs*) curReach {   
     
 }
 #pragma  mark inapp purchase
@@ -348,7 +348,7 @@
         [alert show];    
         return;
     }     
-    Reachability *reach = [Reachability reachabilityForInternetConnection];	
+    ReachabilityAs *reach = [ReachabilityAs reachabilityForInternetConnection];
     NetworkStatus netStatus = [reach currentReachabilityStatus];    
     if (netStatus == NotReachable) {        
         NSLog(@"No internet connection!");        

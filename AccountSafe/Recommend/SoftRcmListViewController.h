@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @class SoftRcmList;
-@class YouMiWall;
 @interface SoftRcmListViewController : UITableViewController
 {
     SoftRcmList *_softRcmList;
-    YouMiWall *wall;
     NSMutableArray *openApps;
 }
 

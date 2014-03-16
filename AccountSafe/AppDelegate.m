@@ -15,8 +15,7 @@
 #import "AccountInfo.h"
 #import "PatternLockAppViewController.h"
 #import "ASIFormDataRequest.h"
-#import "JSONKit.h"
-#import "AdsConfig.h"
+//#import "JSONKit.h"
 #import "NetworkManager.h"
 
 
@@ -368,39 +367,7 @@
 }
 -(void)checkUpdate
 {    
-    NSString *version = @"";
-    NSString* updateLookupUrl = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@",kAppIdOnAppstore];
-    NSURL *url = [NSURL URLWithString:updateLookupUrl];
-    ASIFormDataRequest* versionRequest = [ASIFormDataRequest requestWithURL:url];
-    [versionRequest setRequestMethod:@"GET"];
-    [versionRequest setDelegate:self];
-    [versionRequest setTimeOutSeconds:150];
-    [versionRequest addRequestHeader:@"Content-Type" value:@"application/json"]; 
-    [versionRequest startSynchronous];
     
-    //Response string of our REST call
-    NSString* jsonResponseString = [versionRequest responseString];
-    
-    NSDictionary *loginAuthenticationResponse = [jsonResponseString objectFromJSONString];
-    
-    NSArray *configData = [loginAuthenticationResponse valueForKey:@"results"];
-    NSString* releaseNotes;
-    for (id config in configData) 
-    {
-        version = [config valueForKey:@"version"];
-        self.mTrackViewUrl = [config valueForKey:@"trackViewUrl"];
-        releaseNotes = [config valueForKey:@"releaseNotes"]; 
-        self.mTrackName = [config valueForKey:@"trackName"];
-        NSLog(@"%@",mTrackName);
-    }
-    NSString *localVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    //Check your version with the version in app store
-    if ([AppDelegate CompareVersionFromOldVersion:localVersion newVersion:version]) 
-    {        
-        UIAlertView *createUserResponseAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NewVersion", @"") message: @"" delegate:self cancelButtonTitle:NSLocalizedString(@"Back", @"") otherButtonTitles: NSLocalizedString(@"Ok", @""), nil];
-        [createUserResponseAlert show]; 
-        [createUserResponseAlert release];
-    }
 }
 // 比较oldVersion和newVersion，如果oldVersion比newVersion旧，则返回YES，否则NO
 // Version format[X.X.X]
@@ -436,72 +403,11 @@
 - (void)startAdsConfigReceive
 // Starts a connection to download the current URL.
 {
-    BOOL                success;
-    NSURL *             url;	
-    NSURLRequest *      request;
-    if(self.connection!=nil)
-    {
-        return;
-    }
     
-    assert(self.connection == nil);         // don't tap receive twice in a row!
-    assert(self.fileStream == nil);         // ditto
-    assert(self.filePath == nil);           // ditto
-    
-    // First get and check the URL.
-    
-    url = [[NetworkManager sharedInstance] smartURLForString:AdsUrl];
-    success = (url != nil);
-    
-    // If the URL is bogus, let the user know.  Otherwise kick off the connection.
-    
-    if ((url != nil)) {
-        
-        // Open a stream for the file we're going to receive into.
-        
-        self.filePath = [[NetworkManager sharedInstance] pathForTemporaryFileWithPrefix:@"Get"];
-        assert(self.filePath != nil);
-        
-        //remove this file first
-        NSError* error;
-        NSFileManager* fileMgr = [NSFileManager defaultManager];
-        if ([fileMgr fileExistsAtPath:self.filePath]) {
-            if (![fileMgr removeItemAtPath:self.filePath error:&error])
-                NSLog(@"Unable to delete file: %@", [error localizedDescription]);
-        }
-        self.fileStream = [NSOutputStream outputStreamToFileAtPath:self.filePath append:NO];
-        assert(self.fileStream != nil);
-        
-        [self.fileStream open];
-        
-        // Open a connection for the URL.
-        
-        request = [NSURLRequest requestWithURL:url];
-        assert(request != nil);
-        
-        self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-        assert(self.connection != nil);
-        [[NetworkManager sharedInstance] didStartNetworkOperation];
-    }
 }
 - (void)receiveDidStopWithStatus:(NSString *)statusString
 {
-    if (statusString == nil) {
-        assert(self.filePath != nil);
-        //load ads config
-        [AdsConfig reset];
-        [self parseAdsConfig];
-        
-        AdsConfig* config = [AdsConfig sharedAdsConfig];      
-        
-        //show close ads 
-        if([config wallShouldShow])
-        {
-            //notify observers
-            [[NSNotificationCenter defaultCenter]postNotificationName:kAdsUpdateDidFinishLoading object:nil];
-        }
-        
-    }    
+
     [[NetworkManager sharedInstance] didStopNetworkOperation];
 }
 - (void)stopReceiveWithStatus:(NSString *)statusString
@@ -608,7 +514,6 @@
  */
 -(void)parseAdsConfig
 {
-    AdsConfig *config = [AdsConfig sharedAdsConfig];
-    [config init:self.filePath];
+    
 }
 @end

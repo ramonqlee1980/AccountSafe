@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E014C264-D356-47B6-B956-FBB21830D8A0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AccountSafe</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D745C2DF-B2ED-44D6-AC5B-EDD50221E73F</key>
+		<string>https://github.com/ramonqlee1980/AccountSafe.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AccountSafe.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D745C2DF-B2ED-44D6-AC5B-EDD50221E73F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/ramonqlee1980/AccountSafe.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D745C2DF-B2ED-44D6-AC5B-EDD50221E73F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D745C2DF-B2ED-44D6-AC5B-EDD50221E73F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AccountSafe</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -10,10 +10,8 @@
 #import "SoftRcmList.h"
 #import "SoftInfo.h"
 #import "Flurry.h"
-#import "YouMiWall.h"
-#import "YouMiWallDelegateProtocol.h"
 #import "AppDelegate.h"
-#import "AdsConfig.h"
+
 
 #define kRecommendList @"kRecommendList"
 
@@ -43,14 +41,6 @@
         NSString *xmlPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"SoftList.xml"];
         [_softRcmList loadData:xmlPath];
         
-        //load youmi wall
-        wall = [[YouMiWall alloc] init];
-        wall.appID = kDefaultAppID_iOS;
-        wall.appSecret = kDefaultAppSecret_iOS;
-        
-        // 添加应用列表开放源观察者
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestOffersOpenDataSuccess:) name:YOUMI_OFFERS_APP_DATA_RESPONSE_NOTIFICATION object:nil];
-        [wall requestOffersAppData:YES pageCount:15];
     }
     return self;
 }
@@ -58,9 +48,6 @@
 -(void) dealloc
 {
     [_softRcmList release];
-    [openApps release];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:YOUMI_OFFERS_APP_DATA_RESPONSE_NOTIFICATION object:nil];
-    [wall release];
     [super dealloc];
 }
 
@@ -141,47 +128,6 @@
 }
 
 
-#pragma mark - Table view delegate
--(YouMiWallAppModel *)youmiApp:(NSString*)appName andUrl:(NSString*)linkUrl
-{
-    if(openApps == nil || [openApps count] == 0 || appName == nil || linkUrl == nil)
-    {
-        return nil;
-    }
-    for (YouMiWallAppModel* m in openApps) {
-        if([appName isEqualToString:m.name] && [linkUrl isEqualToString:m.linkURL])
-        {
-            return m;
-        }
-    }
-    return nil;
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSInteger row = [indexPath row];
-    SoftInfo* info = [_softRcmList.softList objectAtIndex:row];
-    if (info) 
-    {
-        //youmi apps?
-        YouMiWallAppModel *model  = [self youmiApp:info.name andUrl:info.url];
-        if(model)
-        {
-            [wall userInstallOffersApp:model];            
-            //NSDictionary *dict = [NSDictionary dictionaryWithObject:model.price forKey:model.name];
-            //[Flurry logEvent:kFlurryDidSelectAppFromRecommend withParameters:dict];
-            
-        }
-        else
-        {
-            NSURL *url = [[NSURL alloc] initWithString:info.url];
-            UIApplication *myApp = [UIApplication sharedApplication];
-            [myApp openURL:url];
-            [url release];
-        }
-    }
-    
-    [Flurry logEvent:[NSString stringWithFormat:@"didSelectRowAtIndexPath:%@",info.icon]];
-}
 
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -341,44 +287,5 @@
 	return [cellView autorelease];
     
 }
-#pragma mark - YouMiWall delegate
 
-- (void)requestOffersOpenDataSuccess:(NSNotification *)note {
-    NSLog(@"--*-1--[Rewarded]requestOffersOpenDataSuccess:-*--");
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:YOUMI_OFFERS_APP_DATA_RESPONSE_NOTIFICATION object:nil];
-    
-    AppDelegate* delegate= (AppDelegate*)[UIApplication sharedApplication].delegate;
-    NSDictionary *info = [note userInfo];
-    NSArray *apps = [info valueForKey:YOUMI_WALL_NOTIFICATION_USER_INFO_OFFERS_APP_KEY];
-    NSString* docDir= [delegate applicationDocumentsDirectory];
-    if(openApps==nil)
-    {
-        openApps = [[NSMutableArray alloc] init];
-        [openApps addObjectsFromArray:apps];
-    }
-    
-    for (NSUInteger i = 0; i<[apps count]; ++i) {
-        SoftInfo* t = [[SoftInfo alloc]init];
-        YouMiWallAppModel *model = [apps objectAtIndex:i];
-        //NSLog(@"model:%@",model) ;
-        t.name = model.name;
-        t.url = model.linkURL;
-        t.detail = model.desc;
-        
-        NSString* smallIconUrl = model.smallIconURL;
-        
-        NSString* smallIconFileName = [NSString stringWithFormat:@"%@%@",model.name,model.storeID];
-        NSString* localIconFileName = [NSString stringWithFormat:@"%@%@%@",docDir,@"/",smallIconFileName];
-        NSData* localData = [NSData dataWithContentsOfFile:localIconFileName];
-        if (localData==nil || localData.length==0) {
-            localData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@", smallIconUrl]]];
-            [localData writeToFile:localIconFileName atomically:YES];        
-        } 
-        t.icon = localIconFileName;
-        
-        
-        [_softRcmList.softList insertObject:t atIndex:0];
-    }
-    [self.tableView reloadData];
-}
 @end
